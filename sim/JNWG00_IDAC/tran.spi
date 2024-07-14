@@ -1,0 +1,106 @@
+*TB_SUN_TR_SKY130NM/TB_NCM
+*----------------------------------------------------------------
+* Include
+*----------------------------------------------------------------
+#ifdef Lay
+.include ../../../work/lpe/JNWG00_IDAC_lpe.spi
+#else
+.include ../../../work/xsch/JNWG00_IDAC.spice
+#endif
+
+*-----------------------------------------------------------------
+* OPTIONS
+*-----------------------------------------------------------------
+.option TNOM=27 GMIN=1e-15 reltol=1e-3
+
+*-----------------------------------------------------------------
+* PARAMETERS
+*-----------------------------------------------------------------
+.param TRF = 10p
+
+.param AVDD = {vdda}
+
+*- 8 MHz clock frequency
+.param PERIOD_CLK = 125n
+
+*- 25% duty-cycle clock
+.param PW_CLK = PERIOD_CLK/2
+
+*- Sampling frequency
+.param fs = 1/PERIOD_CLK
+
+.param T_START = PERIOD_CLK*16
+
+.param T_RESET = {T_START + PERIOD_CLK + PW_CLK}
+
+.param T_RESET_F = {T_RESET + 1n}
+
+*-----------------------------------------------------------------
+* FORCE
+*-----------------------------------------------------------------
+VSS  VSS  0     dc 0
+VDD  VDD_1V8  VSS  pwl 0 0 10n {AVDD}
+VPWR PWRUP_1V8  VSS  pwl 0 0 99n 0 100n {AVDD}
+VRST RST  VSS  pwl 0 0 99n 0 100n {AVDD} {T_RESET} {AVDD} {T_RESET_F} 0
+VCLK CLK 0 dc 0 pulse (0 {AVDD} {T_START} {TRF} {TRF} {PW_CLK} {PERIOD_CLK})
+
+VB3 IBN_1V8<3> 0 dc 0
+VB2 IBN_1V8<2> 0 dc {AVDD}
+VB1 IBN_1V8<1> 0 dc {AVDD}
+VB0 IBN_1V8<0> 0 dc {AVDD}
+
+
+VO3 IDAC_O<3> 0 dc 1.0
+
+
+
+*-----------------------------------------------------------------
+* DUT
+*-----------------------------------------------------------------
+.include ../xdut.spi
+
+
+adut [ CLK RST ] [ ib7 ib6 ib5 ib4 ib3 ib2 ib1 ib0 ] null dut
+.model dut d_cosim simulation="../idac_tb.so"
+
+rvdcon7 ib7 ib<7> 1
+rvdcon6 ib6 ib<6> 1
+rvdcon5 ib5 ib<5> 1
+rvdcon4 ib4 ib<4> 1
+rvdcon3 ib3 ib<3> 1
+rvdcon2 ib2 ib<2> 1
+rvdcon1 ib1 ib<1> 1
+rvdcon0 ib0 ib<0> 1
+
+
+*----------------------------------------------------------------
+* MEASURES
+*----------------------------------------------------------------
+
+
+*----------------------------------------------------------------
+* PROBE
+*----------------------------------------------------------------
+.save all
+.save i(VO3)
+
+*----------------------------------------------------------------
+* NGSPICE control
+*----------------------------------------------------------------
+.control
+set num_threads=8
+set color0=white
+set color1=black
+unset askquit
+
+optran 0 0 0 1n 1u 0
+
+
+tran 1n [125e-9*(16+255)] [125e-9*17]
+write
+quit
+
+
+.endc
+
+.end
