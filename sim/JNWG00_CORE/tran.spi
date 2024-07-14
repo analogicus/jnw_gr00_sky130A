@@ -3,10 +3,10 @@
 * Include
 *----------------------------------------------------------------
 #ifdef Lay
-.include ../../../work/lpe/JNWG00_IDAC_lpe.spi
+.include ../../../work/lpe/JNWG00_CORE_lpe.spi
 #else
 .include ../../../work/lpe/SUNSAR_CDAC8_CV_lpe.spi
-.include ../../../work/xsch/JNWG00_IDAC.spice
+.include ../../../work/xsch/JNWG00_CORE.spice
 
 #endif
 
@@ -46,42 +46,47 @@ VPWR PWRUP_1V8  VSS  pwl 0 0 99n 0 100n {AVDD}
 VRST RST  VSS  pwl 0 0 99n 0 100n {AVDD} {T_RESET} {AVDD} {T_RESET_F} 0
 VCLK CLK 0 dc 0 pulse (0 {AVDD} {T_START} {TRF} {TRF} {PW_CLK} {PERIOD_CLK})
 
-VB3 IBN_1V8<3> 0 dc 0
-VB2 IBN_1V8<2> 0 dc {AVDD}
-VB1 IBN_1V8<1> 0 dc {AVDD}
-VB0 IBN_1V8<0> 0 dc {AVDD}
-
-
-VO3 IDAC_O<3> 0 dc 1.0
-
-
-
 *-----------------------------------------------------------------
 * DUT
 *-----------------------------------------------------------------
 .include ../xdut.spi
 
 
-adut [ CLK RST ] [ ib7 ib6 ib5 ib4 ib3 ib2 ib1 ib0  ibf7 ibf6 ibf5 ibf4 ibf3 ibf2 ibf1 ibf0 ] null dut
-.model dut d_cosim simulation="../idac_tb.so"
+adut [ CLK RST ] [ ib7 ib6 ib5 ib4 ib3 ib2 ib1 ib0  ibf7 ibf6 ibf5 ibf4 ibf3 ibf2 ibf1 ibf0 RES_N_1V8 DIO7 DIO6 DIO5 DIO4 DIO3 DIO2 DIO1 DIO0 idac_o3 idac_o2 idac_o1 idac_o0] null dut
+.model dut d_cosim simulation="../core_tb.so"
 
-rvdcon7 ib7 ib<7> 1
-rvdcon6 ib6 ib<6> 1
-rvdcon5 ib5 ib<5> 1
-rvdcon4 ib4 ib<4> 1
-rvdcon3 ib3 ib<3> 1
-rvdcon2 ib2 ib<2> 1
-rvdcon1 ib1 ib<1> 1
-rvdcon0 ib0 ib<0> 1
+rvdcon7 ib7 IDAC_COARSE_1V8<7> 1
+rvdcon6 ib6 IDAC_COARSE_1V8<6> 1
+rvdcon5 ib5 IDAC_COARSE_1V8<5> 1
+rvdcon4 ib4 IDAC_COARSE_1V8<4> 1
+rvdcon3 ib3 IDAC_COARSE_1V8<3> 1
+rvdcon2 ib2 IDAC_COARSE_1V8<2> 1
+rvdcon1 ib1 IDAC_COARSE_1V8<1> 1
+rvdcon0 ib0 IDAC_COARSE_1V8<0> 1
 
-rvdfcon7 ibf7 ibf<7> 1
-rvdfcon6 ibf6 ibf<6> 1
-rvdfcon5 ibf5 ibf<5> 1
-rvdfcon4 ibf4 ibf<4> 1
-rvdfcon3 ibf3 ibf<3> 1
-rvdfcon2 ibf2 ibf<2> 1
-rvdfcon1 ibf1 ibf<1> 1
-rvdfcon0 ibf0 ibf<0> 1
+rvdfcon7 ibf7 IDAC_FINE_1V8<7> 1
+rvdfcon6 ibf6 IDAC_FINE_1V8<6> 1
+rvdfcon5 ibf5 IDAC_FINE_1V8<5> 1
+rvdfcon4 ibf4 IDAC_FINE_1V8<4> 1
+rvdfcon3 ibf3 IDAC_FINE_1V8<3> 1
+rvdfcon2 ibf2 IDAC_FINE_1V8<2> 1
+rvdfcon1 ibf1 IDAC_FINE_1V8<1> 1
+rvdfcon0 ibf0 IDAC_FINE_1V8<0> 1
+
+rvddcon7 dio7 DIODES_1V8<7> 1
+rvddcon6 dio6 DIODES_1V8<6> 1
+rvddcon5 dio5 DIODES_1V8<5> 1
+rvddcon4 dio4 DIODES_1V8<4> 1
+rvddcon3 dio3 DIODES_1V8<3> 1
+rvddcon2 dio2 DIODES_1V8<2> 1
+rvddcon1 dio1 DIODES_1V8<1> 1
+rvddcon0 dio0 DIODES_1V8<0> 1
+
+rvdocon3 idac_o3 IDAC_O_N_1V8<3> 1
+rvdocon2 idac_o2 IDAC_O_N_1V8<2> 1
+rvdocon1 idac_o1 IDAC_O_N_1V8<1> 1
+rvdocon0 idac_o0 IDAC_O_N_1V8<0> 1
+
 
 
 

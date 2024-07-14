@@ -105,37 +105,37 @@ lab=VSS}
 N 1450 -200 1480 -200 {
 lab=VSS}
 N 230 -430 230 -400 {
-lab=VD}
+lab=#net9}
 N 230 -430 420 -430 {
-lab=VD}
+lab=#net9}
 N 420 -430 420 -400 {
-lab=VD}
+lab=#net9}
 N 420 -430 600 -430 {
-lab=VD}
+lab=#net9}
 N 600 -430 600 -410 {
-lab=VD}
+lab=#net9}
 N 600 -410 600 -400 {
-lab=VD}
+lab=#net9}
 N 770 -430 770 -400 {
-lab=VD}
+lab=#net9}
 N 600 -430 770 -430 {
-lab=VD}
+lab=#net9}
 N 940 -430 940 -400 {
-lab=VD}
+lab=#net9}
 N 770 -430 940 -430 {
-lab=VD}
+lab=#net9}
 N 1110 -430 1110 -400 {
-lab=VD}
+lab=#net9}
 N 940 -430 1110 -430 {
-lab=VD}
+lab=#net9}
 N 1280 -430 1280 -400 {
-lab=VD}
+lab=#net9}
 N 1110 -430 1280 -430 {
-lab=VD}
+lab=#net9}
 N 1450 -430 1450 -400 {
-lab=VD}
+lab=#net9}
 N 1280 -430 1450 -430 {
-lab=VD}
+lab=#net9}
 N 160 -200 190 -200 {
 lab=VSS}
 N 160 -370 190 -370 {
@@ -154,6 +154,24 @@ N 1210 -370 1240 -370 {
 lab=BD_1V8[1]}
 N 1380 -370 1410 -370 {
 lab=BD_1V8[0]}
+N 830 -470 830 -430 {
+lab=#net9}
+N 830 -600 830 -550 {
+lab=VD}
+N 810 -510 810 -370 {
+lab=VSS}
+N 710 -550 710 -540 {
+lab=VD}
+N 710 -550 830 -550 {
+lab=VD}
+N 710 -480 710 -470 {
+lab=#net9}
+N 710 -470 830 -470 {
+lab=#net9}
+N 710 -510 810 -510 {
+lab=VSS}
+N 590 -510 670 -510 {
+lab=RES_N_1V8}
 C {sky130_fd_pr/pnp_05v5.sym} 210 -290 0 0 {name=Q1
 model=pnp_05v5_W3p40L3p40
 spiceprefix=X
@@ -195,7 +213,7 @@ C {JNW_ATR_SKY130NM/JNWATR_NCH_4C1F2.sym} 1070 -370 0 0 {name=x6 }
 C {JNW_ATR_SKY130NM/JNWATR_NCH_4C1F2.sym} 1240 -370 0 0 {name=x7 }
 C {JNW_ATR_SKY130NM/JNWATR_NCH_4C1F2.sym} 1410 -370 0 0 {name=x8 }
 C {devices/ipin.sym} 160 -200 0 0 {name=p1 lab=VSS}
-C {devices/iopin.sym} 840 -430 3 0 {name=p2 lab=VD}
+C {devices/iopin.sym} 830 -600 3 0 {name=p2 lab=VD}
 C {devices/ipin.sym} 160 -440 0 0 {name=p3 lab=BD_1V8[7:0]}
 C {devices/lab_wire.sym} 160 -370 0 0 {name=p4 sig_type=std_logic lab=BD_1V8[7]}
 C {devices/lab_wire.sym} 350 -370 0 0 {name=p5 sig_type=std_logic lab=BD_1V8[6]}
@@ -208,3 +226,6 @@ C {devices/lab_wire.sym} 1380 -370 0 0 {name=p11 sig_type=std_logic lab=BD_1V8[0
 C {cborder/border_s.sym} 1250 -170 0 0 {
 user="Carsten Wulff"
 company="Carsten Wulff Software"}
+C {SUN_TR_SKY130NM/SUNTR_RPPO16.sym} 830 -550 1 0 {name=x9 }
+C {JNW_ATR_SKY130NM/JNWATR_NCH_4C1F2.sym} 670 -510 0 0 {name=x10 }
+C {devices/ipin.sym} 600 -510 0 0 {name=p12 lab=RES_N_1V8}
