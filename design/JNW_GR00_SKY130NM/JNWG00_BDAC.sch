@@ -217,7 +217,7 @@ C {devices/iopin.sym} 830 -600 3 0 {name=p2 lab=VD}
 C {devices/ipin.sym} 160 -440 0 0 {name=p3 lab=BD_1V8[7:0]}
 C {devices/lab_wire.sym} 160 -370 0 0 {name=p4 sig_type=std_logic lab=BD_1V8[7]}
 C {devices/lab_wire.sym} 350 -370 0 0 {name=p5 sig_type=std_logic lab=BD_1V8[6]}
-C {devices/lab_wire.sym} 530 -370 0 0 {name=p6 sig_type=std_logic lab=BD_1V8[4]}
+C {devices/lab_wire.sym} 530 -370 0 0 {name=p6 sig_type=std_logic lab=BD_1V8[5]}
 C {devices/lab_wire.sym} 700 -370 0 0 {name=p7 sig_type=std_logic lab=BD_1V8[4]}
 C {devices/lab_wire.sym} 870 -370 0 0 {name=p8 sig_type=std_logic lab=BD_1V8[3]}
 C {devices/lab_wire.sym} 1040 -370 0 0 {name=p9 sig_type=std_logic lab=BD_1V8[2]}

@@ -97,8 +97,6 @@ N 170 -380 230 -380 {
 lab=PWRUP_1V8}
 N 330 -380 390 -380 {
 lab=PWR_N}
-N 2000 -1240 2000 -1070 {
-lab=VGP}
 N 2000 -1040 2030 -1040 {
 lab=VSS}
 N 2030 -1040 2030 -1010 {
@@ -399,6 +397,22 @@ N 1350 -740 1380 -860 {}
 N 1350 -620 1380 -790 {}
 N 2660 -1040 2760 -1040 {}
 N 2660 -1050 2660 -1040 {}
+N 2020 -1310 2070 -1310 {}
+N 2070 -1340 2070 -1310 {}
+N 2020 -1340 2070 -1340 {}
+N 2020 -1280 2020 -1240 {}
+N 1980 -1340 1980 -1310 {}
+N 1980 -1340 2020 -1340 {}
+N 2070 -1340 2300 -1340 {}
+N 2300 -1340 2300 -1330 {}
+N 2000 -1200 2030 -1200 {}
+N 2030 -1200 2030 -1040 {}
+N 2000 -1090 2000 -1070 {}
+N 2000 -1170 2000 -1150 {}
+N 2000 -1120 2030 -1120 {}
+N 2000 -1240 2000 -1230 {}
+N 1960 -1200 1960 -1120 {}
+N 1960 -1120 1960 -1040 {}
 C {devices/ipin.sym} 170 -1010 0 0 {name=p1 lab=VDD_1V8}
 C {devices/ipin.sym} 170 -170 0 0 {name=p2 lab=VSS}
 C {devices/ipin.sym} 170 -380 0 0 {name=p3 lab=PWRUP_1V8}
@@ -432,7 +446,7 @@ C {devices/lab_wire.sym} 2300 -1330 0 1 {name=p28 sig_type=std_logic lab=VDD_1V8
 C {SUN_TR_SKY130NM/SUNTR_IVX1_CV.sym} 250 -380 0 0 {name=x13 }
 C {devices/lab_wire.sym} 310 -420 0 1 {name=p29 sig_type=std_logic lab=VDD_1V8}
 C {devices/lab_wire.sym} 310 -340 0 1 {name=p30 sig_type=std_logic lab=VSS}
-C {JNW_ATR_SKY130NM/JNWATR_NCH_8C5F0.sym} 1960 -1040 0 0 {name=x14 }
+C {JNW_ATR_SKY130NM/JNWATR_NCH_2C5F0.sym} 1960 -1040 0 0 {name=x14 }
 C {devices/lab_wire.sym} 2080 -1010 0 1 {name=p31 sig_type=std_logic lab=VSS}
 C {devices/lab_wire.sym} 390 -380 0 1 {name=p33 sig_type=std_logic lab=PWR_N}
 C {devices/lab_wire.sym} 1920 -1040 0 0 {name=p34 sig_type=std_logic lab=PWR_N}
@@ -643,3 +657,6 @@ C {devices/lab_wire.sym} 1330 -1330 2 1 {name=p122 sig_type=std_logic lab=BFP1
 C {devices/lab_wire.sym} 1330 -1440 2 1 {name=p123 sig_type=std_logic lab=BFP0
 }
 C {devices/ipin.sym} 980 -1160 0 0 {name=p124 lab=IBF[7:0]}
+C {JNW_ATR_SKY130NM/JNWATR_PCH_2C5F0.sym} 1980 -1310 0 0 {name=x35 }
+C {JNW_ATR_SKY130NM/JNWATR_NCH_2C5F0.sym} 1960 -1120 0 0 {name=x36 }
+C {JNW_ATR_SKY130NM/JNWATR_NCH_2C5F0.sym} 1960 -1200 0 0 {name=x37 }

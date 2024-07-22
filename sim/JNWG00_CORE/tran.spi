@@ -5,7 +5,7 @@
 #ifdef Lay
 .include ../../../work/lpe/JNWG00_CORE_lpe.spi
 #else
-.include ../../../work/lpe/SUNSAR_CDAC8_CV_lpe.spi
+*.include ../../../work/lpe/SUNSAR_CDAC8_CV_lpe.spi
 .include ../../../work/xsch/JNWG00_CORE.spice
 
 #endif
@@ -14,6 +14,7 @@
 * OPTIONS
 *-----------------------------------------------------------------
 .option TNOM=27 GMIN=1e-15 reltol=1e-3
+.option OPTS
 
 *-----------------------------------------------------------------
 * PARAMETERS
@@ -52,8 +53,8 @@ VCLK CLK 0 dc 0 pulse (0 {AVDD} {T_START} {TRF} {TRF} {PW_CLK} {PERIOD_CLK})
 .include ../xdut.spi
 
 
-adut [ CLK RST ] [ ib7 ib6 ib5 ib4 ib3 ib2 ib1 ib0  ibf7 ibf6 ibf5 ibf4 ibf3 ibf2 ibf1 ibf0 RES_N_1V8 DIO7 DIO6 DIO5 DIO4 DIO3 DIO2 DIO1 DIO0 idac_o3 idac_o2 idac_o1 idac_o0] null dut
-.model dut d_cosim simulation="../core_tb.so"
+adut [ CLK RST cmp_o ] [ ib7 ib6 ib5 ib4 ib3 ib2 ib1 ib0  ibf7 ibf6 ibf5 ibf4 ibf3 ibf2 ibf1 ibf0 RES_N_1V8 DIO7 DIO6 DIO5 DIO4 DIO3 DIO2 DIO1 DIO0 idac_o3 idac_o2 idac_o1 idac_o0 state2 state1 state0 c1_1 c1_0 c2_1 c2_0 coarse] null dut
+.model dut d_cosim simulation="../core_tb.so" delay=10p
 
 rvdcon7 ib7 IDAC_COARSE_1V8<7> 1
 rvdcon6 ib6 IDAC_COARSE_1V8<6> 1
@@ -87,7 +88,17 @@ rvdocon2 idac_o2 IDAC_O_N_1V8<2> 1
 rvdocon1 idac_o1 IDAC_O_N_1V8<1> 1
 rvdocon0 idac_o0 IDAC_O_N_1V8<0> 1
 
+rvcocon3 c1_1 C1A_1V8 1
+rvcocon2 c1_0 C1B_1V8 1
+rvcocon1 c2_1 C2A_1V8 1
+rvcocon0 c2_0 C2B_1V8 1
 
+r0 state2 0 1Meg
+r1 state1 0 1Meg
+r2 state0 0 1Meg
+r3 coarse 0 1Meg
+
+E1 CMP_O VSS value={AVDD*(atan(10000*(v(vp)-v(vn))))/(pi) + 1) }
 
 
 *----------------------------------------------------------------
@@ -108,12 +119,19 @@ rvdocon0 idac_o0 IDAC_O_N_1V8<0> 1
 set num_threads=8
 set color0=white
 set color1=black
+set vcc=1.8
+
+*- Override the default digital output bridge.
+pre_set auto_bridge_d_out =
+     + ( ".model auto_dac dac_bridge(out_low = 0.0 out_high = 1.8)"
+     +   "auto_bridge%d [ %s ] [ %s ] auto_dac" )
+
 unset askquit
 
 optran 0 0 0 1n 1u 0
 
 
-tran 1n [125e-9*(16+255)] [125e-9*17]
+tran 100p [125e-9*(16+128)] [125e-9*19]
 write
 quit
 

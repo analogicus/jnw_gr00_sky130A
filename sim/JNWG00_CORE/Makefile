@@ -12,7 +12,7 @@ LIB =JNW_GR00_SKY130NM
 OPT=
 
 
-ver:
+ver: ../../verilog/core_tb.v
 	ngspice vlnggen ../../verilog/core_tb.v
 
 
