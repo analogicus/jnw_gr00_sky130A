@@ -14,21 +14,11 @@ module core_tb (
                 output logic       coarse
                 );
 
-   parameter                       RESET=0, DIODE=1,BLANK1=2,BIGDIODE=3,BLANK2=4,COMPARE=5, INCREMENT=6,BLANK3=7;
-
+   parameter                       RESET=0, DIODE=1,BLANK1=2,BIGDIODE=3,
+                                   BLANK2=4,COMPARE=5, INCREMENT=6,OUTPUT=7;
 
    logic                           rst;
-   logic                           prev_cmp;
-   //logic                           coarse;
-
-   initial begin
-      //$dumpfile ("idac_tb.vcd");
-      //$dumpvars (0, idac_tb);
-   end
-
-   always_ff @(posedge clk) begin
-
-   end
+   logic [4:0]                     sar_ind;
 
    always_ff @(posedge clk or posedge reset) begin
       if(reset)
@@ -45,6 +35,8 @@ module core_tb (
          case(state)
            DIODE: begin
               res_n <= 1;
+              idac_o[0] <= 0;
+              idac_o[1] <= 1;
               diode <= 8'h01;
               state <= BLANK1;
               c1 <= 2;
@@ -71,36 +63,69 @@ module core_tb (
               c2 <= 1;
            end
            INCREMENT: begin
+              if(coarse) begin
 
-              if(prev_cmp != cmp_o)
-                coarse <= 0;
+                 //SAR algorithm
+                 if(sar_ind < 8) begin
+                    if(cmp_o)
+                      ib[7-sar_ind] <= 0;
+                    else
+                      ib[7-sar_ind] <= 1;
 
-              if(coarse && prev_cmp == cmp_o) begin
-                 if(cmp_o)
-                   ib <= ib -4;
-                 else
-                   ib <= ib +4;
+                    sar_ind <= sar_ind +1;
+                 end
+                 if(sar_ind < 7) begin
+                    ib[7-sar_ind-1] <= 1;
+                 end
+
+                 if(sar_ind == 8) begin
+                    coarse <= 0;
+                    sar_ind <= 0;
+                 end
+                 state <= DIODE;
               end
               else begin
-                 if(cmp_o)
-                   ibf <= ibf -1;
-                 else
-                   ibf <= ibf +1;
+
+                 //SAR algorithm
+                 if(sar_ind < 8) begin
+                    if(cmp_o)
+                      ibf[7-sar_ind] <= 0;
+                    else
+                      ibf[7-sar_ind] <= 1;
+
+                    sar_ind <= sar_ind +1;
+                 end
+                 if(sar_ind < 7) begin
+                    ibf[7-sar_ind-1] <= 1;
+                 end
+
+                 if(sar_ind >= 8) begin
+                    if(cmp_o)
+                      ibf <= ibf -1;
+                    else
+                      ibf <= ibf +1;
+
+                    state <= OUTPUT;
+                 end
+                 else begin
+                    state <= DIODE;
+                    end
               end
-
-              state <= DIODE;
-
            end
-           BLANK3: begin
-              c1 <= 0;
-              c2 <= 0;
+           OUTPUT: begin
+              idac_o[0] <= 1;
+              idac_o[1] <= 0;
+              state <= DIODE;
               end
            RESET: begin
-              ib <= 8'h7F;
-              ibf <= 8'h3F;
+              ib <= 8'h80;
+              ibf <= 8'h80;
+              sar_ind <= 0;
               coarse <= 1;
-              prev_cmp <= 0;
-              idac_o <= 3'h7-1;
+              idac_o[0] <= 0;
+              idac_o[1] <= 1;
+              idac_o[2] <= 1;
+              idac_o[3] <= 1;
               diode <= 8'hFF;
               res_n <= 1;
               state <= DIODE;
@@ -110,5 +135,4 @@ module core_tb (
          endcase
       end
    end
-
 endmodule

@@ -51,10 +51,14 @@ N 1210 -600 1270 -600 {
 lab=VP}
 N 1200 -250 1260 -250 {
 lab=VN}
+N 1370 -720 1420 -720 {
+lab=IREF}
+N 1250 -720 1310 -720 {
+lab=IDAC_O[1]}
 C {devices/ipin.sym} 90 -890 0 0 {name=p1 lab=VDD_1V8}
 C {devices/ipin.sym} 100 -480 0 0 {name=p2 lab=VSS}
 C {JNW_GR00_SKY130NM/JNWG00_BDAC.sym} 680 -390 0 0 {name=x2}
-C {JNW_GR00_SKY130NM/JNWG00_IDAC1.sym} 590 -720 0 0 {name=x1}
+C {JNW_GR00_SKY130NM/JNWG00_IDAC.sym} 590 -720 0 0 {name=x1}
 C {devices/lab_wire.sym} 740 -840 0 0 {name=p4 sig_type=std_logic lab=IDAC_O[3:0]}
 C {devices/lab_wire.sym} 680 -580 0 0 {name=p5 sig_type=std_logic lab=IDAC_O[0]}
 C {devices/ipin.sym} 530 -780 0 0 {name=p3 lab=IDAC_FINE_1V8[7:0]}
@@ -82,3 +86,11 @@ C {devices/lab_wire.sym} 1270 -600 0 0 {name=p24 sig_type=std_logic lab=VP}
 C {devices/lab_wire.sym} 1260 -250 0 0 {name=p25 sig_type=std_logic lab=VN}
 C {devices/opin.sym} 1430 -520 0 0 {name=p26 lab=VP}
 C {devices/opin.sym} 1430 -260 0 0 {name=p27 lab=VN}
+C {devices/ipin.sym} 100 -640 0 0 {name=p28 lab=PWRUP_1V8}
+C {devices/opin.sym} 1420 -720 0 0 {name=p29 lab=IBP}
+C {devices/res.sym} 1340 -720 1 0 {name=R1
+value=1
+footprint=1206
+device=resistor
+m=1}
+C {devices/lab_wire.sym} 1260 -720 0 0 {name=p30 sig_type=std_logic lab=IDAC_O[1]}

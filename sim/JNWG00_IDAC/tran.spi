@@ -107,6 +107,10 @@ unset askquit
 
 optran 0 0 0 1n 1u 0
 
+pre_set auto_bridge_d_out =
+     + ( ".model auto_dac dac_bridge(out_low = 0.0 out_high = 1.8)"
+     +   "auto_bridge%d [ %s ] [ %s ] auto_dac" )
+
 
 tran 1n [125e-9*(16+255)] [125e-9*17]
 write
