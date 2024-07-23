@@ -1,0 +1,3 @@
+
+clock_period: 200e-9
+nbpt: 6*(9+9+2)

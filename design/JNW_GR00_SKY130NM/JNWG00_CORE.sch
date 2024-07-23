@@ -52,7 +52,7 @@ lab=VP}
 N 1200 -250 1260 -250 {
 lab=VN}
 N 1370 -720 1420 -720 {
-lab=IREF}
+lab=IBP}
 N 1250 -720 1310 -720 {
 lab=IDAC_O[1]}
 C {devices/ipin.sym} 90 -890 0 0 {name=p1 lab=VDD_1V8}

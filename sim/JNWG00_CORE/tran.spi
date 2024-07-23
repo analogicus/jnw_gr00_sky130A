@@ -12,7 +12,7 @@
 *-----------------------------------------------------------------
 * OPTIONS
 *-----------------------------------------------------------------
-.option TNOM=27 GMIN=1e-15 reltol=1e-3
+.option TNOM=27 GMIN=1e-15 reltol=1e-3 method=gear
 
 *-----------------------------------------------------------------
 * PARAMETERS
@@ -21,14 +21,9 @@
 
 .param AVDD = {vdda}
 
-*- 8 MHz clock frequency
 .param PERIOD_CLK = {clock_period}
 
-*- 25% duty-cycle clock
 .param PW_CLK = PERIOD_CLK/2
-
-*- Sampling frequency
-.param fs = 1/PERIOD_CLK
 
 .param T_START = PERIOD_CLK*16
 
@@ -51,9 +46,9 @@ VCLK CLK 0 dc 0 pulse (0 {AVDD} {T_START} {TRF} {TRF} {PW_CLK} {PERIOD_CLK})
 .include ../xdut.spi
 
 
-VIBP  IBP  0     dc 0.5
+VIBP  IBP  0   dc 0.5
 
-adut [ CLK RST cmp_o ] [ ib7 ib6 ib5 ib4 ib3 ib2 ib1 ib0  ibf7 ibf6 ibf5 ibf4 ibf3 ibf2 ibf1 ibf0 RES_N_1V8 DIO7 DIO6 DIO5 DIO4 DIO3 DIO2 DIO1 DIO0 idac_o3 idac_o2 idac_o1 idac_o0 state2 state1 state0 c1_1 c1_0 c2_1 c2_0 coarse] null dut
+adut [ CLK RST cmp_o ] [ ib7 ib6 ib5 ib4 ib3 ib2 ib1 ib0  ibf7 ibf6 ibf5 ibf4 ibf3 ibf2 ibf1 ibf0 RES_N_1V8 DIO7 DIO6 DIO5 DIO4 DIO3 DIO2 DIO1 DIO0 idac_o3 idac_o2 idac_o1 idac_o0 state2 state1 state0 c1_1 c1_0 c2_1 c2_0 coarse valid] null dut
 .model dut d_cosim simulation="../core_tb.so" delay=10p
 
 rvdcon7 ib7 IDAC_COARSE_1V8<7> 1
@@ -97,14 +92,10 @@ r0 state2 0 1Meg
 r1 state1 0 1Meg
 r2 state0 0 1Meg
 r3 coarse 0 1Meg
+r4 valid 0 1Meg
 
-E1 CMP_O VSS value={AVDD*(atan(10000*(v(vp)-v(vn))))/(pi) + 1) }
-
-
-*----------------------------------------------------------------
-* MEASURES
-*----------------------------------------------------------------
-
+E1 CMP_O VSS value={AVDD*(tanh(10000*(v(vp)-v(vn)))+1)/2) }
+EDS D_STATE VSS value={(v(state0)/AVDD + v(state1)/AVDD*2 + v(state2)/AVDD*4)}
 
 *----------------------------------------------------------------
 * PROBE
@@ -112,6 +103,15 @@ E1 CMP_O VSS value={AVDD*(atan(10000*(v(vp)-v(vn))))/(pi) + 1) }
 *.save all
 .save v(xdut.x1.vgp)
 .save v(xdut.x1.pwr_n)
+.save v(xdut.x1.bp7)
+.save v(xdut.x1.bp6)
+.save v(xdut.x1.bp5)
+.save v(xdut.x1.bp4)
+.save v(xdut.x1.bp3)
+.save v(xdut.x1.bp2)
+.save v(xdut.x1.bp1)
+.save v(xdut.x1.bp0)
+.save v(xdut.idac_o<0>)
 .save v(c2b_1v8)
 .save v(c2a_1v8)
 .save v(c1b_1v8)
@@ -122,11 +122,12 @@ E1 CMP_O VSS value={AVDD*(atan(10000*(v(vp)-v(vn))))/(pi) + 1) }
 .save v(idac_o2)
 .save v(idac_o1)
 .save v(idac_o0)
-.save v(state1)
-.save v(state2)
+.save v(D_STATE)
 .save v(vp) v(vn)
 .save v(cmp_o)
+.save v(vbp)
 .save i(vibp)
+.save v(valid)
 
 *----------------------------------------------------------------
 * NGSPICE control
@@ -135,7 +136,6 @@ E1 CMP_O VSS value={AVDD*(atan(10000*(v(vp)-v(vn))))/(pi) + 1) }
 set num_threads=8
 set color0=white
 set color1=black
-set vcc=1.8
 
 *- Override the default digital output bridge.
 pre_set auto_bridge_d_out =
@@ -146,11 +146,28 @@ unset askquit
 
 optran 0 0 0 1n 1u 0
 
+set fend = .raw
 
-tran 100p [{clock_period}*(16+6*(8+8+2))] [{clock_period}*17]
-write
+* Don't run a temperature sweep
+#ifdef Nosweep
+
+foreach vtemp 25
+  option temp=$vtemp
+  tran [{clock_period}/50] [{clock_period}*(16+{nbpt})] [{clock_period}*20]
+  write {cicname}_$vtemp$fend
+end
+
+#else
+* Run a temperature sweep
+foreach vtemp -40 -20 0 20 40 80 125
+  option temp=$vtemp
+  tran [{clock_period}/50] [{clock_period}*(16+{nbpt})] [{clock_period}*20]
+  write {cicname}_$vtemp$fend
+end
+
+#endif
+
 quit
-
 
 .endc
 

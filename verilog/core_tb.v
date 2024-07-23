@@ -11,7 +11,8 @@ module core_tb (
                 output logic [2:0] state,
                 output logic [1:0] c1,
                 output logic [1:0] c2,
-                output logic       coarse
+                output logic       coarse,
+                output logic       valid
                 );
 
    parameter                       RESET=0, DIODE=1,BLANK1=2,BIGDIODE=3,
@@ -19,6 +20,7 @@ module core_tb (
 
    logic                           rst;
    logic [4:0]                     sar_ind;
+   logic [3:0]                     valid_count;
 
    always_ff @(posedge clk or posedge reset) begin
       if(reset)
@@ -99,13 +101,14 @@ module core_tb (
                     ibf[7-sar_ind-1] <= 1;
                  end
 
-                 if(sar_ind >= 8) begin
+                 if(sar_ind == 8) begin
                     if(cmp_o)
                       ibf <= ibf -1;
                     else
                       ibf <= ibf +1;
 
                     state <= OUTPUT;
+                    valid_count <= 0;
                  end
                  else begin
                     state <= DIODE;
@@ -115,7 +118,14 @@ module core_tb (
            OUTPUT: begin
               idac_o[0] <= 1;
               idac_o[1] <= 0;
-              state <= DIODE;
+
+              if(valid_count > 1)
+                valid <= 1;
+              if(valid_count > 3) begin
+                state <= DIODE;
+                valid <= 0;
+                end
+              valid_count <= valid_count +1;
               end
            RESET: begin
               ib <= 8'h80;
@@ -131,6 +141,8 @@ module core_tb (
               state <= DIODE;
               c1 <= 0;
               c2 <= 0;
+              valid <= 0;
+              valid_count <=0;
            end
          endcase
       end

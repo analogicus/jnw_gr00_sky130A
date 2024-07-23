@@ -5,5 +5,15 @@ load {cicname}.raw
 
 echo "MEAS_START"
 
+foreach vtemp -40 -20 0 20 40 80 125
+
+set fend = .raw
+load {cicname}_$vtemp$fend
+
+meas tran ibp_$vtemp find i(vibp) when v(valid)=0.5
+
+end
+
+
 echo "MEAS_END"
 .endc

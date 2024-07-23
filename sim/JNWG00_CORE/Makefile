@@ -9,39 +9,40 @@ VIEW=Sch
 #VIEW=Lay
 CELL=JNWG00_CORE
 LIB =JNW_GR00_SKY130NM
-OPT=
+CICOPT=
 
 
 ver: ../../verilog/core_tb.v
-	ngspice vlnggen ../../verilog/core_tb.v
+
+		ngspice vlnggen ../../verilog/core_tb.v
 
 
 test:
-	${MAKE} typical OPT="Debug"
+	${MAKE} typical CICOPT="Debug"
 
 typical: netlist ver
-	cicsim run  --replace replace.yaml --name ${VIEW}_typical ${TB} ${OPT} ${VIEW} Gt Ktt Tt Vt
+	cicsim run  --replace replace.yaml --name ${VIEW}_typical ${TB} ${CICOPT} ${VIEW} Gt Ktt Tt Vt
 
 slow: netlist
-	cicsim run  --replace replace.yaml --name ${VIEW}_slow ${TB} ${OPT} ${VIEW} Gt Kss "Th,Tl" Vl
+	cicsim run  --replace replace.yaml --name ${VIEW}_slow ${TB} ${CICOPT} ${VIEW} Gt Kss "Th,Tl" Vl
 
 fast: netlist
-	cicsim run  --replace replace.yaml --name ${VIEW}_fast ${TB} ${OPT} ${VIEW} Gt Kff "Th,Tl" Vh
+	cicsim run  --replace replace.yaml --name ${VIEW}_fast ${TB} ${CICOPT} ${VIEW} Gt Kff "Th,Tl" Vh
 
 tfs: netlist
-	cicsim run  --replace replace.yaml --name ${VIEW}_tfs ${TB} ${OPT} ${VIEW} Gt "Ktt,Kss,Kff" "Tt,Th,Tl" "Vt,Vl,Vh"
+	cicsim run  --replace replace.yaml --name ${VIEW}_tfs ${TB} ${CICOPT} ${VIEW} Gt "Ktt,Kss,Kff" "Tt,Th,Tl" "Vt,Vl,Vh"
 
 etc: netlist
-	cicsim run  --replace replace.yaml --name ${VIEW}_etc ${TB} ${OPT} ${VIEW} Gt "Kss,Kff,Ksf,Kfs" "Th,Tl" "Vl,Vh"
+	cicsim run  --replace replace.yaml --name ${VIEW}_etc ${TB} ${CICOPT} ${VIEW} Gt "Kss,Kff,Ksf,Kfs" "Th,Tl" "Vl,Vh"
 
 mc: netlist
-	cicsim run  --replace replace.yaml --name ${VIEW}_mc --count 30 ${TB} ${OPT} ${VIEW} Gt "Kttmm" "Tt" "Vt"
+	cicsim run  --replace replace.yaml --name ${VIEW}_mc --count 30 ${TB} ${CICOPT} ${VIEW} Gt "Kttmm" "Tt" "Vt"
 
 ntc: netlist
-	cicsim run  --replace replace.yaml --name ${VIEW}_ntc ${TB} ${OPT} ${VIEW} Gt "Ktt,Kss,Kff" "Tt" Vt
+	cicsim run  --replace replace.yaml --name ${VIEW}_ntc ${TB} ${CICOPT} ${VIEW} Gt "Ktt,Kss,Kff" "Tt" Vt
 
 temp: netlist
-	cicsim run  --replace replace.yaml --name ${VIEW}_temp ${TB} ${OPT} ${VIEW} Gt "Ktt" "Tt,Th,Tl" Vt
+	cicsim run  --replace replace.yaml --name ${VIEW}_temp ${TB} ${CICOPT} ${VIEW} Gt "Ktt" "Tt,Th,Tl" Vt
 
 summary:
 	cicsim summary --output "README.md"
