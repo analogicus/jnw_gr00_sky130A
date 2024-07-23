@@ -15,7 +15,7 @@ Grand Plan:
 
 - [x] Make a discrete time PTAT current source work (ideal comparator)
 - [ ] Add comparator, with chopping
-- [ ] Add constant current output to the design 
+- [x] Add constant current output to the design 
 - [ ] Add constant voltage output (VREF) to the design 
 - [ ] Add a PTAT charging of a capacitor to VREF to convert from current to time 
 - [ ] Add a constant current charging to eliminate C variation?
@@ -24,7 +24,7 @@ Grand Plan:
 
 # What
 
-For schematics, see [documents/schematics](documents/schematics.md)
+For schematics, see [documents/schematics](documents/schematics.md) 
 
 | What            | Lib/Folder       | Cell/Name |
 | :-              | :-:              | :-:       |
@@ -73,6 +73,22 @@ For schematics, see [documents/schematics](documents/schematics.md)
 
 # Simulation results
 
-## PTAT Current status
+## PTAT Current 
+### Monte Carlo
 
-![](sim/JNWG00_CORE/results/tran_SchGtKttTtVt.png)
+![](sim/JNWG00_CORE/ptat_Sch_mc.svg)
+
+### Typical, Slow, Fast
+
+![](sim/JNWG00_CORE/ptat_Sch_tfs.svg)
+
+## Stable Current
+
+### Monte Carlo
+
+![](sim/JNWG00_CORE/stable_Sch_mc.svg)
+
+### Typical, Slow, Fast
+
+![](sim/JNWG00_CORE/ptat_Sch_tfs.svg)
+

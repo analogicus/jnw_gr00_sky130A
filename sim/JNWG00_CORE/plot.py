@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import yaml
 import sys
 import click
+import re
 
 def plotFile(name,ax,onepoint=False):
 
@@ -42,7 +43,7 @@ def plotFile(name,ax,onepoint=False):
   if(onepoint):
     y = np.array(y)-offset
 
-  label = name.replace("output_tran/tran_","")
+  label = re.sub("output_.*/[^_]+_","",name)
 
   ax[0].plot(x,y,label=label)
   ax[1].plot(x[1:],np.diff(y)/np.diff(x)*1000,label=label)
@@ -59,10 +60,12 @@ def plotFile(name,ax,onepoint=False):
 
 def plot(runfile,show,onepoint):
 
-  fig,ax = plt.subplots(3,1,figsize=(10,9),sharex=True)
+  fig,ax = plt.subplots(2,1,figsize=(12,8),sharex=True)
 
   with open(runfile) as fi:
     for line in fi:
+      if(line.startswith("#")):
+        continue
       plotFile(line.strip(),ax,onepoint)
 
   for a in ax:

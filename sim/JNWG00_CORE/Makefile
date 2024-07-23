@@ -16,8 +16,16 @@ all:
 #- Run PTAT configuration of bandgap
 	make mc tfs TB=ptat
 
+
 #- Run stable current configuration of bandgap
 	make mc tfs TB=stable
+
+plotall:
+	python plot.py ptat_Sch_mc.run --no-show
+	python plot.py ptat_Sch_tfs.run --no-show
+	python plot.py stable_Sch_mc.run --no-show
+	python plot.py stable_Sch_tfs.run --no-show
+
 
 ver: ../../verilog/core_tb.v
 

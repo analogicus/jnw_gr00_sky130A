@@ -640,8 +640,7 @@ m=1
 value=32f
 footprint=1206
 device="ceramic capacitor"}
-C {cborder/border_xl.sym} -160 0 0 0 {}
+C {cborder/border_xl.sym} -120 0 0 0 {}
 C {SUN_TR_SKY130NM/SUNTR_TIEL_CV.sym} 2180 -1070 0 0 {name=x5 }
 C {devices/lab_wire.sym} 2200 -1170 0 1 {name=p125 sig_type=std_logic lab=VDD_1V8}
-C {cborder/border_xl.sym} -160 100 0 0 {}
 C {devices/lab_wire.sym} 2180 -1050 0 1 {name=p126 sig_type=std_logic lab=VSS}

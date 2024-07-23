@@ -14,3 +14,4 @@ After the SAR algorithms the loop does a bang, bang type loop, increasing, or
 decreasing the fine DAC. Hopefully that compensates for leakage in the IDAC. 
 
 The IDAC must be powered down, and powered up once in a while.
+
