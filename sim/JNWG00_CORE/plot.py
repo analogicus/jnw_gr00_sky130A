@@ -6,8 +6,7 @@ import yaml
 import sys
 import click
 
-def plotFile(name,ax):
-
+def plotFile(name,ax,onepoint=False):
 
   with open("replace.yaml") as fi:
     replace = yaml.safe_load(fi)
@@ -22,37 +21,56 @@ def plotFile(name,ax):
 
   x = list()
   y = list()
+  coarse = list()
+  fine = list()
+  offset = 0
   for t in temps:
-    x.append(int(t))
+    x_t = int(t)
+    x.append(x_t)
     key = "ibp_" + t
     if(key in obj):
+      if(x_t == 25):
+        offset = float(obj[key])*1e6
       y.append(float(obj[key])*1e6)
+
+      coarse.append(obj["coarse_" + t])
+      fine.append(obj["fine_" + t])
+
     else:
       y.append(float.nan)
 
-  ax[0].plot(x,y,label=name)
-  ax[1].plot(x[1:],np.diff(y)/np.diff(x)*1000,label=name)
+  if(onepoint):
+    y = np.array(y)-offset
+
+  label = name.replace("output_tran/tran_","")
+
+  ax[0].plot(x,y,label=label)
+  ax[1].plot(x[1:],np.diff(y)/np.diff(x)*1000,label=label)
+  if(len(ax) > 2):
+    ax[2].plot(x,coarse,label=label + " coarse")
+    ax[2].plot(x,fine,label=label + " fine")
 
 
 
 @click.command()
 @click.argument("runfile")
 @click.option("--show/--no-show",default=True,help="Show plot, or save to file")
-def plot(runfile,show):
+@click.option("--onepoint/--no-onepoint",default=False,help="One point calibration")
 
-  fig,ax = plt.subplots(2,1,figsize=(10,5),sharex=True)
+def plot(runfile,show,onepoint):
+
+  fig,ax = plt.subplots(3,1,figsize=(10,9),sharex=True)
 
   with open(runfile) as fi:
     for line in fi:
-      plotFile(line.strip(),ax)
+      plotFile(line.strip(),ax,onepoint)
 
-  ax[0].grid()
-  ax[1].grid()
+  for a in ax:
+    a.grid()
+    a.legend()
   ax[1].set_xlabel("Temperature [C]")
   ax[0].set_ylabel("Current [uA]")
   ax[1].set_ylabel(" dI/dT [nA/C]")
-  ax[0].legend()
-  ax[1].legend()
   plt.tight_layout()
   if(show):
     plt.show()

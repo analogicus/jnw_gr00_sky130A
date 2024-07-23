@@ -45,6 +45,7 @@ VCLK CLK 0 dc 0 pulse (0 {AVDD} {T_START} {TRF} {TRF} {PW_CLK} {PERIOD_CLK})
 *-----------------------------------------------------------------
 .include ../xdut.spi
 
+RBPS1 R_IBPS_1V8 0 1Meg
 
 VIBP  IBP  0   dc 0.5
 
@@ -98,6 +99,24 @@ r4 valid 0 1Meg
 E1 CMP_O VSS value={AVDD*(tanh(10000*(v(vp)-v(vn)))+1)/2) }
 EDS D_STATE VSS value={(v(state0)/AVDD + v(state1)/AVDD*2 + v(state2)/AVDD*4)}
 
+EFINE D_FINE VSS value={128*v(IDAC_FINE_1V8<7>)/AVDD
++ + 64*v(IDAC_FINE_1V8<6>)/AVDD
++ + 32*v(IDAC_FINE_1V8<5>)/AVDD
++ + 16*v(IDAC_FINE_1V8<4>)/AVDD
++ +  8*v(IDAC_FINE_1V8<3>)/AVDD
++ +  4*v(IDAC_FINE_1V8<2>)/AVDD
++ +  2*v(IDAC_FINE_1V8<1>)/AVDD
++ +  1*v(IDAC_FINE_1V8<0>)/AVDD}
+
+ECOARSE D_COARSE VSS value={128*v(IDAC_COARSE_1V8<7>)/AVDD
++ + 64*v(IDAC_COARSE_1V8<6>)/AVDD
++ + 32*v(IDAC_COARSE_1V8<5>)/AVDD
++ + 16*v(IDAC_COARSE_1V8<4>)/AVDD
++ +  8*v(IDAC_COARSE_1V8<3>)/AVDD
++ +  4*v(IDAC_COARSE_1V8<2>)/AVDD
++ +  2*v(IDAC_COARSE_1V8<1>)/AVDD
++ +  1*v(IDAC_COARSE_1V8<0>)/AVDD}
+
 *----------------------------------------------------------------
 * PROBE
 *----------------------------------------------------------------
@@ -132,6 +151,8 @@ EDS D_STATE VSS value={(v(state0)/AVDD + v(state1)/AVDD*2 + v(state2)/AVDD*4)}
 .save i(vibp)
 .save v(RES_N_1V8)
 .save v(valid)
+.save v(D_FINE)
+.save v(D_COARSE)
 
 *----------------------------------------------------------------
 * NGSPICE control
@@ -154,13 +175,11 @@ set fend = .raw
 
 * Don't run a temperature sweep
 #ifdef Nosweep
-
-foreach vtemp -40
+foreach vtemp 25
   option temp=$vtemp
   tran [{clock_period}/50] [{clock_period}*(16+{nbpt})] [{clock_period}*16]
   write {cicname}_$vtemp$fend
 end
-
 #else
 * Run a temperature sweep
 foreach vtemp {temp_sweep}

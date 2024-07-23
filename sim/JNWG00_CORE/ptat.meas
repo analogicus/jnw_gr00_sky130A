@@ -11,6 +11,8 @@ set fend = .raw
 load {cicname}_$vtemp$fend
 
 meas tran ibp_$vtemp find i(vibp) when v(valid)=0.5
+meas tran fine_$vtemp find v(d_fine) when v(valid)=0.5
+meas tran coarse_$vtemp find v(d_coarse) when v(valid)=0.5
 
 end
 
