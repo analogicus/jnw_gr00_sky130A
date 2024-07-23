@@ -24,6 +24,8 @@ Grand Plan:
 
 # What
 
+For schematics, see [documents/schematics](documents/schematics.md)
+
 | What            | Lib/Folder       | Cell/Name |
 | :-              | :-:              | :-:       |
 | Schematic       | JNW_GR00_SKY130NM | JNW_GR00 |
