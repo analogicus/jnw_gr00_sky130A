@@ -73,4 +73,4 @@ Grand Plan:
 
 ## PTAT Current status
 
-![sim/JNWG00_CORE/results/tran_SchGtKttTtVt.png]
+![](sim/JNWG00_CORE/results/tran_SchGtKttTtVt.png)
