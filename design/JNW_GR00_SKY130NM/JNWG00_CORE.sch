@@ -94,3 +94,4 @@ footprint=1206
 device=resistor
 m=1}
 C {devices/lab_wire.sym} 1260 -720 0 0 {name=p30 sig_type=std_logic lab=IDAC_O[1]}
+C {cborder/border_s.sym} 1250 -150 0 0 {}

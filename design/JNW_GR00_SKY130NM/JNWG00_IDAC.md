@@ -7,7 +7,7 @@ At power off the gate of the PMOS is connected to ground, and the coarse DAC
 bottom plates are connected to ground. As such, there is no charge stored in the
 CDAC. 
 
-A SAR algorithm is run on the coarse DAC first (`../src/core_tb.v`) and then on
+A SAR algorithm is run on the coarse DAC first (`../verilog/core_tb.v`) and then on
 the fine DAC. 
 
 After the SAR algorithms the loop does a bang, bang type loop, increasing, or
