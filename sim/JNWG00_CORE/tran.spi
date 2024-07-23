@@ -159,7 +159,7 @@ end
 
 #else
 * Run a temperature sweep
-foreach vtemp -40 -20 0 20 40 80 125
+foreach vtemp {temp_sweep}
   option temp=$vtemp
   tran [{clock_period}/50] [{clock_period}*(16+{nbpt})] [{clock_period}*20]
   write {cicname}_$vtemp$fend

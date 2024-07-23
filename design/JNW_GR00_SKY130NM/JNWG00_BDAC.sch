@@ -143,7 +143,7 @@ lab=BD_1V8[7]}
 N 350 -370 380 -370 {
 lab=BD_1V8[6]}
 N 530 -370 560 -370 {
-lab=BD_1V8[4]}
+lab=BD_1V8[5]}
 N 700 -370 730 -370 {
 lab=BD_1V8[4]}
 N 870 -370 900 -370 {
@@ -226,6 +226,6 @@ C {devices/lab_wire.sym} 1380 -370 0 0 {name=p11 sig_type=std_logic lab=BD_1V8[0
 C {cborder/border_s.sym} 1250 -170 0 0 {
 user="Carsten Wulff"
 company="Carsten Wulff Software"}
-C {SUN_TR_SKY130NM/SUNTR_RPPO16.sym} 830 -550 1 0 {name=x9 }
+C {SUN_TR_SKY130NM/SUNTR_RPPO8.sym} 830 -550 1 0 {name=x9 }
 C {JNW_ATR_SKY130NM/JNWATR_NCH_4C1F2.sym} 670 -510 0 0 {name=x10 }
 C {devices/ipin.sym} 600 -510 0 0 {name=p12 lab=RES_N_1V8}

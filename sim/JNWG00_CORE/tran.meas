@@ -5,7 +5,7 @@ load {cicname}.raw
 
 echo "MEAS_START"
 
-foreach vtemp -40 -20 0 20 40 80 125
+foreach vtemp {temp_sweep}
 
 set fend = .raw
 load {cicname}_$vtemp$fend
