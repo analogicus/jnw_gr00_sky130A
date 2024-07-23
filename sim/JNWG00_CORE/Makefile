@@ -20,20 +20,18 @@ ver: ../../verilog/core_tb.v
 test:
 	${MAKE} typical CICOPT="Debug"
 
+worst: netlist ver
+	cicsim run  --replace replace.yaml --name ${VIEW}_typical ${TB} ${CICOPT} ${VIEW} Gt Kss Tt Vl
+
+
 typical: netlist ver
 	cicsim run  --replace replace.yaml --name ${VIEW}_typical ${TB} ${CICOPT} ${VIEW} Gt Ktt Tt Vt
 
-slow: netlist
-	cicsim run  --replace replace.yaml --name ${VIEW}_slow ${TB} ${CICOPT} ${VIEW} Gt Kss "Th,Tl" Vl
-
-fast: netlist
-	cicsim run  --replace replace.yaml --name ${VIEW}_fast ${TB} ${CICOPT} ${VIEW} Gt Kff "Th,Tl" Vh
-
 tfs: netlist
-	cicsim run  --replace replace.yaml --name ${VIEW}_tfs ${TB} ${CICOPT} ${VIEW} Gt "Ktt,Kss,Kff" "Tt,Th,Tl" "Vt,Vl,Vh"
+	cicsim run  --replace replace.yaml --name ${VIEW}_tfs ${TB} ${CICOPT} ${VIEW} Gt "Ktt,Kss,Kff" "Tt" "Vt,Vl,Vh"
 
 etc: netlist
-	cicsim run  --replace replace.yaml --name ${VIEW}_etc ${TB} ${CICOPT} ${VIEW} Gt "Kss,Kff,Ksf,Kfs" "Th,Tl" "Vl,Vh"
+	cicsim run  --replace replace.yaml --name ${VIEW}_etc ${TB} ${CICOPT} ${VIEW} Gt "Kss,Kff,Ksf,Kfs" "Tt" "Vl,Vh"
 
 mc: netlist
 	cicsim run  --replace replace.yaml --name ${VIEW}_mc --count 30 ${TB} ${CICOPT} ${VIEW} Gt "Kttmm" "Tt" "Vt"

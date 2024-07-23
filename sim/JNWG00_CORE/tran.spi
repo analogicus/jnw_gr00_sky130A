@@ -48,7 +48,8 @@ VCLK CLK 0 dc 0 pulse (0 {AVDD} {T_START} {TRF} {TRF} {PW_CLK} {PERIOD_CLK})
 
 VIBP  IBP  0   dc 0.5
 
-adut [ CLK RST cmp_o ] [ ib7 ib6 ib5 ib4 ib3 ib2 ib1 ib0  ibf7 ibf6 ibf5 ibf4 ibf3 ibf2 ibf1 ibf0 RES_N_1V8 DIO7 DIO6 DIO5 DIO4 DIO3 DIO2 DIO1 DIO0 idac_o3 idac_o2 idac_o1 idac_o0 state2 state1 state0 c1_1 c1_0 c2_1 c2_0 coarse valid] null dut
+adut [ CLK RST cmp_o ] [ ib7 ib6 ib5 ib4 ib3 ib2 ib1 ib0
++ ibf7 ibf6 ibf5 ibf4 ibf3 ibf2 ibf1 ibf0 RES_N_1V8 DIO7 DIO6 DIO5 DIO4 DIO3 DIO2 DIO1 DIO0 idac_o3 idac_o2 idac_o1 idac_o0 state2 state1 state0 c1_1 c1_0 c2_1 c2_0 coarse valid] null dut
 .model dut d_cosim simulation="../core_tb.so" delay=10p
 
 rvdcon7 ib7 IDAC_COARSE_1V8<7> 1
@@ -110,6 +111,8 @@ EDS D_STATE VSS value={(v(state0)/AVDD + v(state1)/AVDD*2 + v(state2)/AVDD*4)}
 .save v(xdut.x1.bp3)
 .save v(xdut.x1.bp2)
 .save v(xdut.x1.bp1)
+.save v(xdut.x1.vs)
+.save v(xdut.x1.vd)
 .save v(xdut.x1.bp0)
 .save v(xdut.idac_o<0>)
 .save v(c2b_1v8)
@@ -127,6 +130,7 @@ EDS D_STATE VSS value={(v(state0)/AVDD + v(state1)/AVDD*2 + v(state2)/AVDD*4)}
 .save v(cmp_o)
 .save v(vbp)
 .save i(vibp)
+.save v(RES_N_1V8)
 .save v(valid)
 
 *----------------------------------------------------------------
@@ -151,9 +155,9 @@ set fend = .raw
 * Don't run a temperature sweep
 #ifdef Nosweep
 
-foreach vtemp 25
+foreach vtemp -40
   option temp=$vtemp
-  tran [{clock_period}/50] [{clock_period}*(16+{nbpt})] [{clock_period}*20]
+  tran [{clock_period}/50] [{clock_period}*(16+{nbpt})] [{clock_period}*16]
   write {cicname}_$vtemp$fend
 end
 
@@ -161,7 +165,7 @@ end
 * Run a temperature sweep
 foreach vtemp {temp_sweep}
   option temp=$vtemp
-  tran [{clock_period}/50] [{clock_period}*(16+{nbpt})] [{clock_period}*20]
+  tran [{clock_period}/50] [{clock_period}*(16+{nbpt})] [{clock_period}*16]
   write {cicname}_$vtemp$fend
 end
 

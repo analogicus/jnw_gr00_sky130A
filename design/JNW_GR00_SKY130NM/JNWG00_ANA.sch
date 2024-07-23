@@ -26,15 +26,14 @@ lab=VSS}
 N 1470 -650 1510 -650 {
 lab=CMP_O_1V8}
 N 880 -650 1080 -690 {
-lab=CMP_IP}
+lab=#net1}
 N 880 -630 1080 -610 {
-lab=CMP_IN}
+lab=#net2}
 C {devices/ipin.sym} 170 -1020 0 0 {name=p1 lab=VDD_1V8}
 C {devices/ipin.sym} 120 -60 0 0 {name=p2 lab=VSS}
 C {cborder/border_s.sym} 1310 -170 0 0 {user="Carsten Wulff" company="Carsten Wulff Software"
 lab=PWRUP_1V8}
 C {JNW_GR00_SKY130NM/JNWG00_CMP.sym} 1390 -630 0 0 {name=x2}
-C {JNW_GR00_SKY130NM/JNWG00_CHP.sym} 1160 -650 0 0 {name=x3}
 C {devices/opin.sym} 1510 -650 0 0 {name=p3 lab=CMP_O_1V8}
 C {devices/lab_wire.sym} 1110 -530 0 0 {name=p12 sig_type=std_logic lab=CHP_1V8}
 C {devices/lab_wire.sym} 1110 -560 0 0 {name=p13 sig_type=std_logic lab=VDD_1V8}

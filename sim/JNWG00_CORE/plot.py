@@ -3,8 +3,10 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import yaml
+import sys
+import click
 
-def main(name):
+def plotFile(name,ax):
 
 
   with open("replace.yaml") as fi:
@@ -26,26 +28,36 @@ def main(name):
     if(key in obj):
       y.append(float(obj[key])*1e6)
     else:
-      y.append(float("nan"))
+      y.append(float.nan)
 
-  foname = name + ".png"
+  ax[0].plot(x,y,label=name)
+  ax[1].plot(x[1:],np.diff(y)/np.diff(x)*1000,label=name)
+
+
+
+@click.command()
+@click.argument("runfile")
+@click.option("--show/--no-show",default=True,help="Show plot, or save to file")
+def plot(runfile,show):
 
   fig,ax = plt.subplots(2,1,figsize=(10,5),sharex=True)
-  ax[0].plot(x,y)
-  ax[1].set_xlabel("Temperature [C]")
-  ax[0].set_ylabel("Current [uA]")
-  ax[1].plot(x[1:],np.diff(y)/np.diff(x)*1000)
+
+  with open(runfile) as fi:
+    for line in fi:
+      plotFile(line.strip(),ax)
+
   ax[0].grid()
   ax[1].grid()
+  ax[1].set_xlabel("Temperature [C]")
+  ax[0].set_ylabel("Current [uA]")
   ax[1].set_ylabel(" dI/dT [nA/C]")
+  ax[0].legend()
+  ax[1].legend()
   plt.tight_layout()
-  plt.savefig(foname)
-
-
-  # Save new yaml file
-  with open(yamlfile,"w") as fo:
-    yaml.dump(obj,fo)
-
+  if(show):
+    plt.show()
+  else:
+    plt.savefig(runfile.replace(".run",".svg"))
 
 if __name__ == "__main__":
-  main("output_tran/tran_SchGtKttTtVt")
+  plot()

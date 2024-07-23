@@ -189,20 +189,6 @@ N 770 -1060 770 -1040 {
 lab=BP7}
 N 770 -940 770 -920 {
 lab=BP4}
-N 2160 -740 2200 -740 {
-lab=VSS}
-N 2240 -1080 2240 -1040 {
-lab=#net1}
-N 2200 -1080 2240 -1080 {
-lab=#net1}
-N 2200 -1080 2200 -1070 {
-lab=#net1}
-N 2240 -1080 2260 -1110 {
-lab=#net1}
-N 2180 -1040 2200 -1040 {
-lab=VSS}
-N 2180 -770 2180 -740 {
-lab=VSS}
 N 1560 -1290 1560 -1270 {
 lab=#net2}
 N 1560 -1210 1560 -1190 {
@@ -392,14 +378,6 @@ N 1350 -620 1380 -790 {}
 N 2660 -1040 2760 -1040 {}
 N 2660 -1050 2660 -1040 {}
 N 2300 -1340 2300 -1330 {}
-N 2200 -1010 2200 -740 {}
-N 2180 -1040 2180 -770 {}
-N 2200 -1150 2220 -1150 {}
-N 2220 -1180 2220 -1150 {}
-N 2200 -1180 2220 -1180 {}
-N 2200 -1120 2200 -1080 {}
-N 2160 -1180 2160 -1150 {}
-N 2160 -1180 2200 -1180 {}
 N 2010 -780 2010 -740 {}
 N 2010 -860 2010 -840 {}
 N 2010 -940 2010 -920 {}
@@ -415,11 +393,15 @@ N 2010 -1130 2030 -1130 {}
 N 1970 -1210 1970 -810 {}
 N 1920 -810 1970 -810 {}
 N 2010 -1050 2030 -1050 {}
+N 2220 -1110 2260 -1110 {}
+N 2180 -1170 2180 -1150 {}
+N 2180 -1170 2200 -1170 {}
+N 2180 -1070 2180 -1050 {}
 C {devices/ipin.sym} 170 -1010 0 0 {name=p1 lab=VDD_1V8}
 C {devices/ipin.sym} 170 -170 0 0 {name=p2 lab=VSS}
 C {devices/ipin.sym} 170 -380 0 0 {name=p3 lab=PWRUP_1V8}
-C {JNW_ATR_SKY130NM/JNWATR_PCH_8C5F0.sym} 2260 -1240 0 0 {name=x1 }
-C {JNW_ATR_SKY130NM/JNWATR_PCH_8C1F2.sym} 2260 -1110 0 0 {name=x2 }
+C {JNW_ATR_SKY130NM/JNWATR_PCH_12C5F0.sym} 2260 -1240 0 0 {name=x1 }
+C {JNW_ATR_SKY130NM/JNWATR_PCH_12C1F2.sym} 2260 -1110 0 0 {name=x2 }
 C {devices/lab_wire.sym} 600 -1410 0 1 {name=p4 sig_type=std_logic lab=VDD_1V8}
 C {devices/lab_wire.sym} 600 -1330 0 1 {name=p5 sig_type=std_logic lab=VSS}
 C {devices/lab_wire.sym} 520 -1360 0 0 {name=p6 sig_type=std_logic lab=IB[7]}
@@ -521,7 +503,6 @@ C {devices/lab_wire.sym} 1020 -1040 0 1 {name=p73 sig_type=std_logic lab=VGP
 C {devices/lab_wire.sym} 740 -800 0 0 {name=p74 sig_type=std_logic lab=VSS
 }
 C {SUN_SAR9B_SKY130NM/SUNSAR_CDAC8_CV.sym} 790 -1060 0 0 {name=x12}
-C {JNW_ATR_SKY130NM/JNWATR_NCH_8C1F2.sym} 2240 -1040 0 1 {name=x5 }
 C {devices/res.sym} 1560 -1320 0 0 {name=R1
 value=1k
 footprint=1206
@@ -647,8 +628,6 @@ C {devices/lab_wire.sym} 1330 -1330 2 1 {name=p122 sig_type=std_logic lab=BFP1
 C {devices/lab_wire.sym} 1330 -1440 2 1 {name=p123 sig_type=std_logic lab=BFP0
 }
 C {devices/ipin.sym} 980 -1160 0 0 {name=p124 lab=IBF[7:0]}
-C {JNW_ATR_SKY130NM/JNWATR_PCH_8C1F2.sym} 2160 -1150 0 0 {name=x35 }
-C {devices/lab_wire.sym} 2170 -1180 0 1 {name=p125 sig_type=std_logic lab=VDD_1V8}
 C {devices/lab_wire.sym} 1920 -810 0 0 {name=p34 sig_type=std_logic lab=PWR_N}
 C {JNW_ATR_SKY130NM/JNWATR_NCH_2C5F0.sym} 1970 -1210 0 0 {name=x14 }
 C {JNW_ATR_SKY130NM/JNWATR_NCH_2C5F0.sym} 1970 -1130 0 0 {name=x36 }
@@ -661,4 +640,8 @@ m=1
 value=32f
 footprint=1206
 device="ceramic capacitor"}
-C {cborder/border_xl.sym} -120 0 0 0 {}
+C {cborder/border_xl.sym} -160 0 0 0 {}
+C {SUN_TR_SKY130NM/SUNTR_TIEL_CV.sym} 2180 -1070 0 0 {name=x5 }
+C {devices/lab_wire.sym} 2200 -1170 0 1 {name=p125 sig_type=std_logic lab=VDD_1V8}
+C {cborder/border_xl.sym} -160 100 0 0 {}
+C {devices/lab_wire.sym} 2180 -1050 0 1 {name=p126 sig_type=std_logic lab=VSS}
