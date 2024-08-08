@@ -136,11 +136,12 @@ C {devices/lab_wire.sym} 860 -410 0 0 {name=p1 sig_type=std_logic lab=VDD_1V8}
 C {devices/lab_wire.sym} 740 -410 0 1 {name=p2 sig_type=std_logic lab=VSS}
 C {devices/ipin.sym} 170 -180 0 0 {name=p3 lab=CA_1V8}
 C {devices/ipin.sym} 630 -130 0 0 {name=p4 lab=VSS}
-C {devices/ipin.sym} 630 -510 0 0 {name=p5 lab=VDD_1V8}
+C {devices/ipin.sym} 210 -580 0 0 {name=p5 lab=VDD_1V8}
 C {devices/iopin.sym} 800 -470 1 1 {name=p8 lab=CA}
 C {cborder/border_s.sym} 1250 -170 0 0 {
 user="Carsten Wulff"
-company="Carsten Wulff Software"}
+company="Carsten Wulff Software"
+spice_ignore=true}
 C {SUN_TR_SKY130NM/SUNTR_IVX1_CV.sym} 200 -180 0 0 {name=x4 }
 C {SUN_TR_SKY130NM/SUNTR_IVX1_CV.sym} 300 -180 0 0 {name=x5 }
 C {SUN_TR_SKY130NM/SUNTR_IVX1_CV.sym} 400 -180 0 0 {name=x6 }

@@ -12,7 +12,7 @@
 *-----------------------------------------------------------------
 * OPTIONS
 *-----------------------------------------------------------------
-.option TNOM=27 GMIN=1e-15 reltol=1e-3 method=gear
+.option TNOM=27 GMIN=1e-15 reltol=1e-4 method=gear
 
 *-----------------------------------------------------------------
 * PARAMETERS
@@ -49,7 +49,7 @@ RBPS1 R_IBPS_1V8 0 1Meg
 
 VIBP  IBP  0   dc 0.5
 
-adut [ CLK RST cmp_o ] [ ib7 ib6 ib5 ib4 ib3 ib2 ib1 ib0
+adut [ CLK RST PWRUP_1V8 cmp_o ] [ ib7 ib6 ib5 ib4 ib3 ib2 ib1 ib0
 + ibf7 ibf6 ibf5 ibf4 ibf3 ibf2 ibf1 ibf0 RES_N_1V8 DIO7 DIO6 DIO5 DIO4 DIO3 DIO2 DIO1 DIO0 idac_o3 idac_o2 idac_o1 idac_o0 state2 state1 state0 c1_1 c1_0 c2_1 c2_0 coarse valid] null dut
 .model dut d_cosim simulation="../core_tb.so" delay=10p
 

@@ -2,6 +2,7 @@
 module core_tb (
                 input wire         clk, // expect a 10M clock
                 input wire         reset,
+                input logic        pwrup,
                 input wire         cmp_o,
                 output logic [7:0] ib,
                 output logic [7:0] ibf,
@@ -91,21 +92,21 @@ module core_tb (
                  //SAR algorithm
                  if(sar_ind < 8) begin
                     if(cmp_o)
-                      ibf[7-sar_ind] <= 0;
-                    else
                       ibf[7-sar_ind] <= 1;
+                    else
+                      ibf[7-sar_ind] <= 0;
 
                     sar_ind <= sar_ind +1;
                  end
                  if(sar_ind < 7) begin
-                    ibf[7-sar_ind-1] <= 1;
+                    ibf[7-sar_ind-1] <= 0;
                  end
 
                  if(sar_ind == 8) begin
                     if(cmp_o)
-                      ibf <= ibf -1;
-                    else
                       ibf <= ibf +1;
+                    else
+                      ibf <= ibf - 1;
 
                     state <= OUTPUT;
                     count <= 0;
@@ -129,7 +130,7 @@ module core_tb (
               end
            RESET: begin
               ib <= 8'h80;
-              ibf <= 8'h80;
+              ibf <= 8'h7F;
               sar_ind <= 0;
               coarse <= 1;
               idac_o[0] <= 0;
@@ -149,10 +150,13 @@ module core_tb (
                  c1 <= 0;
                  c1 <= 0;
               end
-
-
            end
-         endcase
+         endcase // case (state)
+
+         if(!pwrup) begin
+            ibf <= 8'hFF;
+            ib <= 8'h00;
+        end
       end
    end
 endmodule

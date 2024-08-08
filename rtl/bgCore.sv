@@ -7,6 +7,7 @@ module bgCore(
               output wire       IOUT,
               output wire       VP,
               output wire       VN,
+              output wire       CMPO,
               //Digital
               input logic       pwrup,
               input logic [7:0] idacFine,
@@ -67,5 +68,16 @@ u1_ccell (
  .CB( VN ),
  .CB_1V8( c2[1] )
 );
+
+JNWG00_CMP
+u0_cmp (
+ .VDD_1V8( VDD_1V8),
+ .VSS(VSS),
+ .VP(VP),
+ .VN(VN),
+ .CMPO(CMPO),
+ .ZERO_1V8(cmpZeroOffset)
+ .SWAP_1V8(cmpSwapInput),
+)
 
 endmodule

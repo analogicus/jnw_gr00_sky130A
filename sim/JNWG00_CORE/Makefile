@@ -27,9 +27,10 @@ plotall:
 	python plot.py stable_Sch_tfs.run --no-show
 
 
-ver: ../../verilog/core_tb.v
-
-		ngspice vlnggen ../../verilog/core_tb.v
+ver: ../../rtl/core_tb.v
+	-rm core_tb.so
+	-rm -rf core_tb_obj_dir
+		ngspice vlnggen ../../rtl/core_tb.v
 
 stable:
 	echo "* Set stable current with temperature\nVris R_IBPS_1V8 0 dc {AVDD}\n" > stable.spi
