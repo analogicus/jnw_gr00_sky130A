@@ -90,5 +90,5 @@ For schematics, see [documents/schematics](documents/schematics.md)
 
 ### Typical, Slow, Fast
 
-![](sim/JNWG00_CORE/ptat_Sch_tfs.svg)
+![](sim/JNWG00_CORE/stable_Sch_tfs.svg)
 
