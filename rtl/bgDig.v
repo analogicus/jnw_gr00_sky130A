@@ -14,13 +14,20 @@ module bgDig (
                 output logic [1:0] c2,
                 output logic       cmpZeroOffset,
                 output logic       cmpSwapInput,
-                output logic [2:0] state,
+                output logic [3:0] state,
                 output logic       coarse,
                 output logic       valid
                 );
 
-   parameter                       RESET=0, DIODE=1,BLANK1=2,BIGDIODE=3,
-                                   BLANK2=4,COMPARE=5, INCREMENT=6,OUTPUT=7;
+   parameter                       RESET=0,
+                                   DIODE=1,
+                                   BLANK1=2,
+                                   BIGDIODE=3,
+                                   BLANK2=4,
+                                   COMPARE=5,
+                                   SETTLE=6,
+                                   INCREMENT=7,
+                                   OUTPUT=8;
 
    logic                           rst;
    logic [4:0]                     sar_ind;
@@ -67,9 +74,12 @@ module bgDig (
               c2 <= 0;
            end
            COMPARE: begin
-              state <= INCREMENT;
+              state <= SETTLE;
               c1 <= 1;
               c2 <= 1;
+           end
+           SETTLE: begin
+              state <= INCREMENT;
            end
            INCREMENT: begin
               if(coarse) begin
@@ -83,11 +93,11 @@ module bgDig (
 
                     sar_ind <= sar_ind +1;
                  end
+
                  if(sar_ind < 7) begin
                     idacCoarse[7-sar_ind-1] <= 1;
                  end
-
-                 if(sar_ind == 8) begin
+                 else if(sar_ind == 7) begin
                     coarse <= 0;
                     sar_ind <= 0;
                  end
@@ -108,11 +118,11 @@ module bgDig (
                     idacFine[7-sar_ind-1] <= 0;
                  end
 
-                 if(sar_ind == 8) begin
-                    if(CMPO)
-                      idacFine <= idacFine +1;
-                    else
-                      idacFine <= idacFine - 1;
+                 if(sar_ind == 7) begin
+                    //if(CMPO)
+                    //  idacFine <= idacFine +1;
+                    //else
+                    //  idacFine <= idacFine - 1;
 
                     state <= OUTPUT;
                     count <= 0;

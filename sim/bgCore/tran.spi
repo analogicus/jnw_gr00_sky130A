@@ -6,7 +6,8 @@
 .include ../../../work/lpe/bgCore_lpe.spi
 #else
 .include ../../../work/lpe/SUNSAR_CDAC8_CV_lpe.spi
-.include ../../../work/xsch/JNWG00_CMP.spice
+.include ../../../design/JNW_GR00_SKY130NM/JNWG00_CMP_mdl.spice
+*.include ../../../work/xsch/JNWG00_CMP.spice
 .include ../../../work/xsch/JNWG00_IDAC.spice
 .include ../../../work/xsch/JNWG00_BDAC.spice
 .include ../../../work/xsch/JNWG00_CCELL.spice
@@ -67,6 +68,7 @@ EVDIFF delta_vd 0 value={v(xdut.vsmpl_p) - v(xdut.vsmpl_n)}
 .save v(xdut.VSMPL_N)
 .save i(VIOUT)
 .save v(xdut.x0.vgn2)
+.save v(xdut.x3.vgp)
 .save v(delta_vd)
 *.save all
 
