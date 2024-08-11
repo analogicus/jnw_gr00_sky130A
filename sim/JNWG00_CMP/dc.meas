@@ -1,0 +1,14 @@
+* Measure JNWG00_CMP
+.control
+
+load {cicname}.raw
+
+echo "MEAS_START"
+
+
+let vin = (v(vp) - v(vn))*1e3
+
+meas dc voff_mV find vin when v(cmpo)=0.9 FALL=LAST
+
+echo "MEAS_END"
+.endc

@@ -12,19 +12,19 @@ lab=VDD_1V8}
 N 890 -730 930 -730 {
 lab=SWAP_B}
 N 1190 -730 1250 -730 {
-lab=SWAP_B}
+lab=SWAP_N}
 N 970 -610 1000 -610 {
 lab=VSS}
 N 1120 -610 1150 -610 {
 lab=VDD_1V8}
 N 890 -610 930 -610 {
-lab=SWAP_B}
+lab=SWAP_N}
 N 1190 -610 1250 -610 {
 lab=SWAP_B}
 N 970 -700 970 -640 {
-lab=VP}
+lab=VN}
 N 1150 -700 1150 -640 {
-lab=VP}
+lab=VN}
 N 970 -580 1150 -580 {
 lab=V2}
 N 970 -760 1150 -760 {
@@ -46,9 +46,9 @@ lab=SWAP_N}
 N 1190 -390 1250 -390 {
 lab=SWAP_B}
 N 970 -480 970 -420 {
-lab=VN}
+lab=VP}
 N 1150 -480 1150 -420 {
-lab=VN}
+lab=VP}
 N 970 -360 1150 -360 {
 lab=V1}
 N 970 -540 1150 -540 {
@@ -92,9 +92,9 @@ lab=SWAP_N}
 N 610 -130 720 -130 {
 lab=SWAP_B}
 N 970 -450 1150 -450 {
-lab=VN}
-N 970 -670 1150 -670 {
 lab=VP}
+N 970 -670 1150 -670 {
+lab=VN}
 N 1530 -630 1690 -630 {
 lab=VSS}
 N 2250 -850 2290 -850 {
@@ -326,13 +326,9 @@ lab=VSS}
 N 650 -1440 650 -1280 {
 lab=VBP}
 N 460 -1340 460 -1330 {
-lab=#net2}
+lab=VDD_INT}
 N 460 -1420 460 -1400 {
 lab=VDD_INT}
-N 920 -660 970 -660 {
-lab=VP}
-N 910 -440 970 -440 {
-lab=VN}
 N 1910 -820 2290 -820 {
 lab=VFCP}
 N 2130 -800 2510 -800 {
@@ -390,8 +386,8 @@ lab=VSPD}
 N 1990 -660 2080 -660 {
 lab=VSPD}
 N 1910 -630 2080 -630 {
-lab=#net3}
-N 2030 -790 2250 -790 {
+lab=#net2}
+N 2030 -880 2250 -880 {
 lab=VDD_1V8}
 N 2080 -600 2080 -470 {
 lab=VSN3}
@@ -413,6 +409,12 @@ N 2140 -630 2140 -530 {
 lab=V2}
 N 1900 -740 1950 -740 {
 lab=VBP}
+N 460 -1400 460 -1340 {
+lab=VDD_INT}
+N 1990 -880 1990 -790 {
+lab=VDD_1V8}
+N 1990 -880 2030 -880 {
+lab=VDD_1V8}
 C {JNW_ATR_SKY130NM/JNWATR_NCH_12C1F2.sym} 1490 -630 0 0 {name=x2[3:0]}
 C {JNW_ATR_SKY130NM/JNWATR_NCH_12C1F2.sym} 1730 -630 0 1 {name=x1[3:0]}
 C {JNW_ATR_SKY130NM/JNWATR_NCH_2C1F2.sym} 930 -730 0 0 {name=x3 }
@@ -434,22 +436,22 @@ C {devices/lab_wire.sym} 1000 -390 0 1 {name=p8 sig_type=std_logic lab=VSS}
 C {devices/ipin.sym} 300 -130 0 0 {name=p10 lab=SWAP_1V8}
 C {SUN_TR_SKY130NM/SUNTR_IVX1_CV.sym} 330 -130 0 0 {name=x12 }
 C {SUN_TR_SKY130NM/SUNTR_IVX1_CV.sym} 530 -130 0 0 {name=x13 }
-C {devices/lab_wire.sym} 410 -170 0 0 {name=p11 sig_type=std_logic lab=VDD_1V8}
+C {devices/lab_wire.sym} 480 -170 0 0 {name=p11 sig_type=std_logic lab=VDD_1V8}
 C {devices/lab_wire.sym} 500 -130 0 0 {name=p12 sig_type=std_logic lab=SWAP_N}
 C {devices/lab_wire.sym} 700 -130 0 0 {name=p13 sig_type=std_logic lab=SWAP_B}
-C {devices/lab_wire.sym} 440 -90 0 1 {name=p14 sig_type=std_logic lab=VSS}
+C {devices/lab_wire.sym} 470 -90 0 1 {name=p14 sig_type=std_logic lab=VSS}
 C {devices/lab_wire.sym} 910 -390 0 0 {name=p15 sig_type=std_logic lab=SWAP_N}
 C {devices/lab_wire.sym} 1250 -390 0 1 {name=p16 sig_type=std_logic lab=SWAP_B}
 C {devices/lab_wire.sym} 890 -730 0 0 {name=p18 sig_type=std_logic lab=SWAP_B}
 C {devices/lab_wire.sym} 890 -510 0 0 {name=p19 sig_type=std_logic lab=SWAP_B}
 C {devices/lab_wire.sym} 1250 -510 0 1 {name=p20 sig_type=std_logic lab=SWAP_N}
 C {devices/lab_wire.sym} 1250 -610 0 1 {name=p21 sig_type=std_logic lab=SWAP_B}
-C {devices/lab_wire.sym} 890 -610 0 0 {name=p22 sig_type=std_logic lab=SWAP_B}
-C {devices/lab_wire.sym} 1250 -730 0 1 {name=p17 sig_type=std_logic lab=SWAP_B}
+C {devices/lab_wire.sym} 890 -610 0 0 {name=p22 sig_type=std_logic lab=SWAP_N}
+C {devices/lab_wire.sym} 1250 -730 0 1 {name=p17 sig_type=std_logic lab=SWAP_N}
 C {devices/lab_wire.sym} 1360 -760 0 1 {name=p23 sig_type=std_logic lab=V1}
 C {devices/lab_wire.sym} 1370 -560 0 1 {name=p24 sig_type=std_logic lab=V2}
-C {devices/ipin.sym} 910 -440 0 0 {name=p25 lab=VN}
-C {devices/ipin.sym} 920 -660 0 0 {name=p26 lab=VP}
+C {devices/ipin.sym} 970 -680 0 0 {name=p25 lab=VN}
+C {devices/ipin.sym} 970 -460 0 0 {name=p26 lab=VP}
 C {JNW_ATR_SKY130NM/JNWATR_PCH_8C5F0.sym} 2330 -850 0 1 {name=x11[1:0]}
 C {JNW_ATR_SKY130NM/JNWATR_PCH_8C5F0.sym} 2470 -850 0 0 {name=x14[1:0]}
 C {JNW_ATR_SKY130NM/JNWATR_PCH_8C1F2.sym} 2330 -750 0 1 {name=x15 }
@@ -511,7 +513,6 @@ C {devices/lab_wire.sym} 2290 -650 0 1 {name=p60 sig_type=std_logic lab=VGN}
 C {devices/lab_wire.sym} 2290 -450 0 1 {name=p61 sig_type=std_logic lab=VSN3}
 C {devices/lab_wire.sym} 2510 -450 0 0 {name=p62 sig_type=std_logic lab=VSN4}
 C {SUN_TR_SKY130NM/SUNTR_RPPO8.sym} 460 -1250 3 0 {name=x11 }
-C {devices/vsource.sym} 460 -1370 0 0 {name=V2 value=0}
 C {JNW_ATR_SKY130NM/JNWATR_PCH_8C5F0.sym} 2670 -740 0 0 {name=x35 }
 C {JNW_ATR_SKY130NM/JNWATR_NCH_2C5F0.sym} 2670 -410 0 0 {name=x36 }
 C {devices/lab_wire.sym} 2600 -560 0 1 {name=p64 sig_type=std_logic lab=VGN2}

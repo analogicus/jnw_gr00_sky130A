@@ -30,7 +30,7 @@ plotall:
 ver: ../../rtl/core_tb.v
 	-rm core_tb.so
 	-rm -rf core_tb_obj_dir
-		ngspice vlnggen ../../rtl/core_tb.v
+	ngspice vlnggen ../../rtl/core_tb.v
 
 stable:
 	echo "* Set stable current with temperature\nVris R_IBPS_1V8 0 dc {AVDD}\n" > stable.spi

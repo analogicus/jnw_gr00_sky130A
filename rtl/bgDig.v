@@ -1,17 +1,20 @@
 `default_nettype none
-module core_tb (
+module bgDig (
                 input wire         clk, // expect a 10M clock
                 input wire         reset,
                 input logic        pwrup,
-                input wire         cmp_o,
-                output logic [7:0] ib,
-                output logic [7:0] ibf,
-                output logic       res_n,
-                output logic [7:0] diode,
-                output logic [3:0] idac_o,
-                output logic [2:0] state,
+                input wire         CMPO,
+                output logic [7:0] idacFine,
+                output logic [7:0] idacCoarse,
+                output logic [3:0] idacOutSelect_n,
+                output logic [7:0] diodeSelect,
+                output logic       resPtatEnable_n,
+                output logic       resStableSelect,
                 output logic [1:0] c1,
                 output logic [1:0] c2,
+                output logic       cmpZeroOffset,
+                output logic       cmpSwapInput,
+                output logic [2:0] state,
                 output logic       coarse,
                 output logic       valid
                 );
@@ -33,14 +36,17 @@ module core_tb (
    always_ff @(posedge clk) begin
       if(rst) begin
          state <= RESET;
+         resStableSelect <= 0;
+         cmpZeroOffset <= 0;
+         cmpSwapInput <= 0;
       end
       else begin
          case(state)
            DIODE: begin
-              res_n <= 1;
-              idac_o[0] <= 0;
-              idac_o[1] <= 1;
-              diode <= 8'h01;
+              resPtatEnable_n <= 1;
+              idacOutSelect_n[0] <= 0;
+              idacOutSelect_n[1] <= 1;
+              diodeSelect <= 8'h01;
               state <= BLANK1;
               c1 <= 2;
               c2 <= 0;
@@ -50,8 +56,8 @@ module core_tb (
               state <= BIGDIODE;
            end
            BIGDIODE: begin
-              res_n <= 0;
-              diode <= 8'hFF;
+              resPtatEnable_n <= 0;
+              diodeSelect <= 8'hFF;
               state <= BLANK2;
               c1 <= 0;
               c2 <= 2;
@@ -70,15 +76,15 @@ module core_tb (
 
                  //SAR algorithm
                  if(sar_ind < 8) begin
-                    if(cmp_o)
-                      ib[7-sar_ind] <= 0;
+                    if(CMPO)
+                      idacCoarse[7-sar_ind] <= 0;
                     else
-                      ib[7-sar_ind] <= 1;
+                      idacCoarse[7-sar_ind] <= 1;
 
                     sar_ind <= sar_ind +1;
                  end
                  if(sar_ind < 7) begin
-                    ib[7-sar_ind-1] <= 1;
+                    idacCoarse[7-sar_ind-1] <= 1;
                  end
 
                  if(sar_ind == 8) begin
@@ -91,22 +97,22 @@ module core_tb (
 
                  //SAR algorithm
                  if(sar_ind < 8) begin
-                    if(cmp_o)
-                      ibf[7-sar_ind] <= 1;
+                    if(CMPO)
+                      idacFine[7-sar_ind] <= 1;
                     else
-                      ibf[7-sar_ind] <= 0;
+                      idacFine[7-sar_ind] <= 0;
 
                     sar_ind <= sar_ind +1;
                  end
                  if(sar_ind < 7) begin
-                    ibf[7-sar_ind-1] <= 0;
+                    idacFine[7-sar_ind-1] <= 0;
                  end
 
                  if(sar_ind == 8) begin
-                    if(cmp_o)
-                      ibf <= ibf +1;
+                    if(CMPO)
+                      idacFine <= idacFine +1;
                     else
-                      ibf <= ibf - 1;
+                      idacFine <= idacFine - 1;
 
                     state <= OUTPUT;
                     count <= 0;
@@ -117,8 +123,8 @@ module core_tb (
               end
            end
            OUTPUT: begin
-              idac_o[0] <= 1;
-              idac_o[1] <= 0;
+              idacOutSelect_n[0] <= 1;
+              idacOutSelect_n[1] <= 0;
 
               if(count > 1)
                 valid <= 1;
@@ -129,16 +135,16 @@ module core_tb (
               count <= count +1;
               end
            RESET: begin
-              ib <= 8'h80;
-              ibf <= 8'h7F;
+              idacCoarse <= 8'h80;
+              idacFine <= 8'h7F;
               sar_ind <= 0;
               coarse <= 1;
-              idac_o[0] <= 0;
-              idac_o[1] <= 1;
-              idac_o[2] <= 1;
-              idac_o[3] <= 1;
-              diode <= 8'hFF;
-              res_n <= 1;
+              idacOutSelect_n[0] <= 0;
+              idacOutSelect_n[1] <= 1;
+              idacOutSelect_n[2] <= 1;
+              idacOutSelect_n[3] <= 1;
+              diodeSelect <= 8'hFF;
+              resPtatEnable_n <= 1;
               state <= DIODE;
               c1 <= 2;
               c2 <= 2;
@@ -154,8 +160,8 @@ module core_tb (
          endcase // case (state)
 
          if(!pwrup) begin
-            ibf <= 8'hFF;
-            ib <= 8'h00;
+            idacFine <= 8'hFF;
+            idacCoarse <= 8'h00;
         end
       end
    end

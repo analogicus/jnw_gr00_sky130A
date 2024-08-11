@@ -1,0 +1,9 @@
+options:
+  useTmpDir: False
+  sha: True
+corner:
+  Lay: ''
+  Sch: ''
+ngspice:
+  library: JNW_GR00_SKY130NM
+  cell: bgCore

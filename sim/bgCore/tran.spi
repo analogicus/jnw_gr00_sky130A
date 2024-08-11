@@ -1,0 +1,116 @@
+*TB_SUN_TR_SKY130NM/TB_NCM
+*----------------------------------------------------------------
+* Include
+*----------------------------------------------------------------
+#ifdef Lay
+.include ../../../work/lpe/bgCore_lpe.spi
+#else
+.include ../../../work/lpe/SUNSAR_CDAC8_CV_lpe.spi
+.include ../../../work/xsch/JNWG00_CMP.spice
+.include ../../../work/xsch/JNWG00_IDAC.spice
+.include ../../../work/xsch/JNWG00_BDAC.spice
+.include ../../../work/xsch/JNWG00_CCELL.spice
+.include ../../../rtl/bgCore.spice
+#endif
+
+*-----------------------------------------------------------------
+* OPTIONS
+*-----------------------------------------------------------------
+.option TNOM=27 GMIN=1e-15 reltol=1e-4 method=gear
+
+*-----------------------------------------------------------------
+* PARAMETERS
+*-----------------------------------------------------------------
+
+.param TRF = 10p
+
+.param AVDD = {vdda}
+
+.param PERIOD_CLK = {clock_period}
+
+.param PW_CLK = PERIOD_CLK/2
+
+.param T_START = PERIOD_CLK*16
+
+.param T_RESET = {T_START + PERIOD_CLK + PW_CLK}
+
+.param T_RESET_F = {T_RESET + 1n}
+
+*-----------------------------------------------------------------
+* FORCE
+*-----------------------------------------------------------------
+VSS  VSS     0  dc 0
+VDD  VDD_1V8 0  pwl 0 0 10n {AVDD}
+VPWR pwrup   0  pwl 0 0 99n 0 100n {AVDD}
+VRST reset   0  pwl 0 0 99n 0 100n {AVDD} {T_RESET} {AVDD} {T_RESET_F} 0
+VCLK clk     0  dc 0 pulse (0 {AVDD} {T_START} {TRF} {TRF} {PW_CLK} {PERIOD_CLK})
+
+*-----------------------------------------------------------------
+* DUT
+*-----------------------------------------------------------------
+
+VIOUT  IOUT  0   dc 0.5
+EVDIFF delta_vd 0 value={v(xdut.vsmpl_p) - v(xdut.vsmpl_n)}
+
+.include ../xdut.spi
+.include ../svinst.spi
+
+*----------------------------------------------------------------
+* PROBE
+*----------------------------------------------------------------
+.save v(CMPO)
+.save v(IOUT)
+.save v(pwrup)
+.save v(reset)
+.save v(clk)
+.save v(xdut.VSMPL_P)
+.save v(xdut.VSMPL_N)
+.save i(VIOUT)
+.save v(xdut.x0.vgn2)
+.save v(delta_vd)
+*.save all
+
+*----------------------------------------------------------------
+* NGSPICE control
+*----------------------------------------------------------------
+
+.control
+set num_threads=8
+set color0=white
+set color1=black
+
+
+
+*- Override the default digital output bridge.
+pre_set auto_bridge_d_out =
+     + ( ".model auto_dac dac_bridge(out_low = 0.0 out_high = 1.8)"
+     +   "auto_bridge%d [ %s ] [ %s ] auto_dac" )
+
+unset askquit
+
+optran 0 0 0 1n 1u 0
+
+set fend = .raw
+
+* Don't run a temperature sweep
+#ifdef Nosweep
+foreach vtemp 25
+  option temp=$vtemp
+  tran [{clock_period}/250] [{clock_period}*(16+{nbpt})] [{clock_period}*16]
+  write {cicname}_$vtemp$fend
+end
+#else
+* Run a temperature sweep
+foreach vtemp {temp_sweep}
+  option temp=$vtemp
+  tran [{clock_period}/250] [{clock_period}*(16+{nbpt})] [{clock_period}*16]
+  write {cicname}_$vtemp$fend
+end
+
+#endif
+
+quit
+
+.endc
+
+.end

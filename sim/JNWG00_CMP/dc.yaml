@@ -1,0 +1,19 @@
+#<name>:
+#  src:
+#    - <paramters>
+#  typ: <typical spec value>
+#  name: <long name>
+#  min: <minimum spec value>
+#  max: <maximum spec value>
+#  scale: <scale, multiply result by scale>
+#  digits: <significant digits>
+#  unit: Unit
+
+voff:
+  src: voff_mv
+  typ: 0
+  min: -30
+  max: 30
+  scale: 1
+  digits: 3
+  unit: mV

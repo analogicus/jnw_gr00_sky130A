@@ -5,8 +5,6 @@ module bgCore(
               input wire        VSS,
               //Analog
               output wire       IOUT,
-              output wire       VP,
-              output wire       VN,
               output wire       CMPO,
               //Digital
               input logic       pwrup,
@@ -17,7 +15,9 @@ module bgCore(
               input logic       resStableSelect,
               input logic       resPtatEnable_n,
               input logic [1:0] c1,
-              input logic [1:0] c2
+              input logic [1:0] c2,
+              input logic cmpZeroOffset,
+              input logic cmpSwapInput
               );
 
 
@@ -52,10 +52,10 @@ JNWG00_CCELL
 u0_ccell (
  .VDD_1V8( VDD_1V8 ),
  .CA( idac_0 ),
- .CA_1V8( c1[0] ),
+ .CA_1V8( c1[1] ),
  .VSS( VSS ),
- .CB( VP ),
- .CB_1V8( c1[1] )
+ .CB( VSMPL_P ),
+ .CB_1V8( c1[0] )
 );
 
 
@@ -63,21 +63,23 @@ JNWG00_CCELL
 u1_ccell (
  .VDD_1V8( VDD_1V8 ),
  .CA( idac_0 ),
- .CA_1V8( c2[0] ),
+ .CA_1V8( c2[1] ),
  .VSS( VSS ),
- .CB( VN ),
- .CB_1V8( c2[1] )
+ .CB( VSMPL_N ),
+ .CB_1V8( c2[0] )
 );
 
 JNWG00_CMP
 u0_cmp (
  .VDD_1V8( VDD_1V8),
+ .PWRUP_1V8(pwrup),
  .VSS(VSS),
- .VP(VP),
- .VN(VN),
+ .VP(VSMPL_P),
  .CMPO(CMPO),
- .ZERO_1V8(cmpZeroOffset)
- .SWAP_1V8(cmpSwapInput),
-)
+ .VN(VSMPL_N),
+ .ZERO_1V8(cmpZeroOffset),
+ .SWAP_1V8(cmpSwapInput)
+        );
+
 
 endmodule

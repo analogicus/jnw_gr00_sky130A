@@ -1,0 +1,6 @@
+../../rtl/JNWG00_BDAC_mdl.sv
+../../rtl/JNWG00_CCELL_mdl.sv
+../../rtl/JNWG00_IDAC_mdl.sv
+../../rtl/bgCore.sv
+../../rtl/core_tb.v
+bgCore_tb.sv

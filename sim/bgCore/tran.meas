@@ -1,0 +1,19 @@
+* Measure JNWG00_CORE
+.control
+
+load {cicname}.raw
+
+echo "MEAS_START"
+
+foreach vtemp {temp_sweep}
+
+set fend = .raw
+load {cicname}_$vtemp$fend
+
+meas tran i_$vtemp find i(viout) when v(valid)=0.5
+meas tran fine_$vtemp find v(dec_idacfine) when v(valid)=0.5
+meas tran coarse_$vtemp find v(dec_idaccoarse) when v(valid)=0.5
+
+end
+echo "MEAS_END"
+.endc
