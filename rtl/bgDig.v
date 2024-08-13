@@ -104,7 +104,7 @@ module bgDig (
                  state <= DIODE;
               end
               else begin
-
+                 /*
                  //SAR algorithm
                  if(sar_ind < 8) begin
                     if(CMPO)
@@ -118,7 +118,7 @@ module bgDig (
                     idacFine[7-sar_ind-1] <= 0;
                  end
 
-                 if(sar_ind == 7) begin
+                 if(sar_ind == 8) begin
                     //if(CMPO)
                     //  idacFine <= idacFine +1;
                     //else
@@ -130,6 +130,8 @@ module bgDig (
                  else begin
                     state <= DIODE;
                     end
+                  */
+                 state <= OUTPUT;
               end
            end
            OUTPUT: begin

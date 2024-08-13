@@ -1,0 +1,7 @@
+*Model comparator
+.subckt JNWG00_CMP VDD_1V8 VSS VP CMPO VN SWAP_1V8 PWRUP_1V8 ZERO_1V8
+
+C1 VP 0 100f
+C2 VN 0 100f
+E1 CMPO VSS value={v(VDD_1V8)*(tanh(10000*(v(vp)-v(vn)))+1)/2) }
+.ends
