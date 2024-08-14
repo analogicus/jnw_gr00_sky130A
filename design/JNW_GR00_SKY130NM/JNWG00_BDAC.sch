@@ -69,13 +69,11 @@ lab=#net9}
 N 410 -440 410 -420 {
 lab=#net9}
 N 220 -440 220 -420 {
-lab=#net9}
+lab=VD}
 N 1440 -220 1470 -220 {
 lab=VSS}
 N 220 -530 220 -500 {
-lab=#net9}
-N 220 -530 410 -530 {
-lab=#net9}
+lab=VD}
 N 410 -530 410 -500 {
 lab=#net9}
 N 410 -530 590 -530 {
@@ -109,15 +107,9 @@ lab=#net9}
 N 820 -830 820 -780 {
 lab=VD}
 N 700 -650 700 -640 {
-lab=VD}
-N 700 -650 820 -650 {
-lab=VD}
+lab=#net10}
 N 700 -580 700 -570 {
-lab=#net9}
-N 700 -570 820 -570 {
-lab=#net9}
-N 700 -610 800 -610 {
-lab=VSS}
+lab=#net11}
 N 580 -610 660 -610 {
 lab=RES_N_1V8}
 N 180 -300 220 -300 {
@@ -171,7 +163,7 @@ lab=BD_1V8[1]}
 N 1370 -270 1400 -270 {
 lab=BD_1V8[0]}
 N 220 -500 220 -440 {
-lab=#net9}
+lab=VD}
 N 410 -500 410 -440 {
 lab=#net9}
 N 590 -510 590 -440 {
@@ -239,19 +231,19 @@ lab=VSS}
 N 1470 -220 1610 -220 {
 lab=VSS}
 N 1610 -430 1610 -410 {
-lab=#net10}
+lab=#net12}
 N 1470 -370 1590 -370 {
 lab=VSS}
 N 1610 -330 1610 -310 {
-lab=#net11}
+lab=#net13}
 N 1370 -190 1570 -190 {
 lab=R_IBPS_1V8}
 N 1570 -280 1570 -190 {
 lab=R_IBPS_1V8}
 N 1610 -540 1610 -510 {
-lab=#net12}
+lab=#net14}
 N 1610 -660 1610 -620 {
-lab=#net13}
+lab=#net15}
 N 1470 -580 1590 -580 {
 lab=VSS}
 N 1470 -580 1470 -470 {
@@ -263,6 +255,10 @@ lab=VSS}
 N 1470 -700 1470 -580 {
 lab=VSS}
 N 1610 -790 1610 -740 {
+lab=VD}
+N 220 -770 220 -530 {
+lab=VD}
+N 220 -770 820 -770 {
 lab=VD}
 C {sky130_fd_pr/pnp_05v5.sym} 200 -390 0 0 {name=Q1
 model=pnp_05v5_W3p40L3p40
@@ -301,7 +297,8 @@ C {devices/iopin.sym} 820 -830 3 0 {name=p2 lab=VD}
 C {devices/ipin.sym} 150 -540 0 0 {name=p3 lab=BD_1V8[7:0]}
 C {cborder/border_s.sym} 1250 -170 0 0 {
 user="Carsten Wulff"
-company="Carsten Wulff Software"}
+company="Carsten Wulff Software"
+spice_ignore=true}
 C {SUN_TR_SKY130NM/SUNTR_RPPO4.sym} 820 -650 1 0 {name=x9 }
 C {JNW_ATR_SKY130NM/JNWATR_NCH_12C1F2.sym} 660 -610 0 0 {name=x10 }
 C {devices/ipin.sym} 590 -610 0 0 {name=p12 lab=RES_N_1V8}

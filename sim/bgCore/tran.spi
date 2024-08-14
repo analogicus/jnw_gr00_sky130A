@@ -6,8 +6,8 @@
 .include ../../../work/lpe/bgCore_lpe.spi
 #else
 .include ../../../work/lpe/SUNSAR_CDAC8_CV_lpe.spi
-.include ../../../design/JNW_GR00_SKY130NM/JNWG00_CMP_mdl.spice
-*.include ../../../work/xsch/JNWG00_CMP.spice
+*.include ../../../design/JNW_GR00_SKY130NM/JNWG00_CMP_mdl.spice
+.include ../../../work/xsch/JNWG00_CMP.spice
 .include ../../../work/xsch/JNWG00_IDAC.spice
 .include ../../../work/xsch/JNWG00_BDAC.spice
 .include ../../../work/xsch/JNWG00_CCELL.spice
@@ -18,6 +18,7 @@
 * OPTIONS
 *-----------------------------------------------------------------
 .option TNOM=27 GMIN=1e-15 reltol=1e-4 method=gear
+*method=gear
 
 *-----------------------------------------------------------------
 * PARAMETERS
@@ -70,6 +71,9 @@ EVDIFF delta_vd 0 value={v(xdut.vsmpl_p) - v(xdut.vsmpl_n)}
 .save v(xdut.x0.vgn2)
 .save v(xdut.x3.vgp)
 .save v(delta_vd)
+.save v(xdut.idac_0)
+.save v(xdut.x1.ctop)
+.save v(xdut.x2.ctop)
 *.save all
 
 *----------------------------------------------------------------
@@ -96,16 +100,17 @@ set fend = .raw
 
 * Don't run a temperature sweep
 #ifdef Nosweep
-foreach vtemp 25
+foreach vtemp -25
   option temp=$vtemp
-  tran [{clock_period}/250] [{clock_period}*(16+{nbpt})] [{clock_period}*16]
+  tran 1n [{clock_period}*(16+{nbpt})]
+*  [{clock_period}*16]
   write {cicname}_$vtemp$fend
 end
 #else
 * Run a temperature sweep
 foreach vtemp {temp_sweep}
   option temp=$vtemp
-  tran [{clock_period}/250] [{clock_period}*(16+{nbpt})] [{clock_period}*16]
+  tran 1n [{clock_period}*(16+{nbpt})] [{clock_period}*16]
   write {cicname}_$vtemp$fend
 end
 

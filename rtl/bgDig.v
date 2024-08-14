@@ -16,20 +16,18 @@ module bgDig (
                 output logic       cmpSwapInput,
                 output logic [3:0] state,
                 output logic       coarse,
-                output logic       valid
+                output logic       valid,
+                output logic rst
                 );
 
    parameter                       RESET=0,
                                    DIODE=1,
-                                   BLANK1=2,
-                                   BIGDIODE=3,
-                                   BLANK2=4,
-                                   COMPARE=5,
-                                   SETTLE=6,
-                                   INCREMENT=7,
-                                   OUTPUT=8;
+                                   BIGDIODE=2,
+                                   COMPARE=3,
+                                   INCREMENT=4,
+                                   OUTPUT=5;
 
-   logic                           rst;
+   //logic                           rst;
    logic [4:0]                     sar_ind;
    logic [3:0]                     count;
 
@@ -50,36 +48,42 @@ module bgDig (
       else begin
          case(state)
            DIODE: begin
-              resPtatEnable_n <= 1;
+              resPtatEnable_n <= 0;
               idacOutSelect_n[0] <= 0;
               idacOutSelect_n[1] <= 1;
-              diodeSelect <= 8'h01;
-              state <= BLANK1;
+              diodeSelect <= 8'h80;
               c1 <= 2;
               c2 <= 0;
-           end
-           BLANK1: begin
-              c1 <= 0;
-              state <= BIGDIODE;
+
+              if(count == 3) begin
+                 state <= BIGDIODE;
+                 count <=0;
+              end
+              else begin
+                 count <= count +1;
+              end
+
            end
            BIGDIODE: begin
               resPtatEnable_n <= 0;
-              diodeSelect <= 8'hFF;
-              state <= BLANK2;
+              diodeSelect <= 8'h7F;
               c1 <= 0;
               c2 <= 2;
-           end
-           BLANK2: begin
-              state <= COMPARE;
-              c2 <= 0;
+
+              if(count == 5) begin
+                 state <= COMPARE;
+                 count <=0;
+              end
+              else begin
+                 count <= count +1;
+              end
+
            end
            COMPARE: begin
-              state <= SETTLE;
+              state <= INCREMENT;
               c1 <= 1;
               c2 <= 1;
-           end
-           SETTLE: begin
-              state <= INCREMENT;
+              //diodeSelect <= 8'h00;
            end
            INCREMENT: begin
               if(coarse) begin
@@ -100,25 +104,27 @@ module bgDig (
                  else if(sar_ind == 7) begin
                     coarse <= 0;
                     sar_ind <= 0;
+                    idacFine[7] <= 1;
+
                  end
                  state <= DIODE;
               end
               else begin
-                 /*
+
                  //SAR algorithm
-                 if(sar_ind < 8) begin
+                 if(sar_ind < 4) begin
                     if(CMPO)
-                      idacFine[7-sar_ind] <= 1;
-                    else
                       idacFine[7-sar_ind] <= 0;
+                    else
+                      idacFine[7-sar_ind] <= 1;
 
                     sar_ind <= sar_ind +1;
                  end
-                 if(sar_ind < 7) begin
-                    idacFine[7-sar_ind-1] <= 0;
+                 if(sar_ind < 4) begin
+                    idacFine[7-sar_ind-1] <= 1;
                  end
 
-                 if(sar_ind == 8) begin
+                 if(sar_ind == 4) begin
                     //if(CMPO)
                     //  idacFine <= idacFine +1;
                     //else
@@ -130,13 +136,15 @@ module bgDig (
                  else begin
                     state <= DIODE;
                     end
-                  */
-                 state <= OUTPUT;
-              end
+
+                 //state <= OUTPUT;
+              end // else: !if(coarse)
+              count <= 0;
            end
            OUTPUT: begin
               idacOutSelect_n[0] <= 1;
               idacOutSelect_n[1] <= 0;
+              diodeSelect <= 8'h00;
 
               if(count > 1)
                 valid <= 1;
@@ -148,32 +156,36 @@ module bgDig (
               end
            RESET: begin
               idacCoarse <= 8'h80;
-              idacFine <= 8'h7F;
+              idacFine <= 8'h00;
               sar_ind <= 0;
               coarse <= 1;
               idacOutSelect_n[0] <= 0;
               idacOutSelect_n[1] <= 1;
               idacOutSelect_n[2] <= 1;
               idacOutSelect_n[3] <= 1;
-              diodeSelect <= 8'hFF;
-              resPtatEnable_n <= 1;
-              state <= DIODE;
-              c1 <= 2;
-              c2 <= 2;
+              diodeSelect <= 8'h80;
+              resPtatEnable_n <= 0;
               valid <= 0;
-              count <= count +1;
               if(count > 3) begin
-                state <= DIODE;
                  count <= 0;
                  c1 <= 0;
                  c1 <= 0;
+                 state <= DIODE;
               end
+              else begin
+                 c1 <= 2;
+                 c2 <= 2;
+                 count <= count +1;
+                 state <= RESET;
+
+            end
            end
          endcase // case (state)
 
          if(!pwrup) begin
-            idacFine <= 8'hFF;
+            idacFine <= 8'h00;
             idacCoarse <= 8'h00;
+            count <= 0;
         end
       end
    end
