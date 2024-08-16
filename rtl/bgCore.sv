@@ -54,38 +54,19 @@ module bgCore(
               .VSS( VSS )
               );
 
-
-   JNWG00_CCELL
-     u0_ccell (
-               .VDD_1V8( VDD_1V8 ),
-               .CA( idac_0 ),
-               .CA_1V8( diode ),
-               .VSS( VSS ),
-               .CB( VSMPL_P ),
-               );
-
-
-   JNWG00_CCELL
-     u1_ccell (
-               .VDD_1V8( VDD_1V8 ),
-               .CA( idac_0 ),
-               .CA_1V8( bigDiodeRes ),
-               .VSS( VSS ),
-               .CB( VSMPL_N ),
-               );
-
    JNWG00_CMP
      u0_cmp (
              .VDD_1V8( VDD_1V8),
              .PWRUP_1V8(pwrup),
              .VSS(VSS),
              .VCP(VCP),
-             .VP(VSMPL_P),
+             .IDAC(idac_0),
              .CMPO(CMPO),
              .IBN(IBN),
-             .VN(VSMPL_N),
              .ZERO_1V8(cmpZeroOffset),
-             .SWAP_1V8(cmpSwapInput)
+             .SWAP_1V8(cmpSwapInput),
+             .DIODE_1V8(diode),
+             .BIGDIODE_1V8(bigDiodeRes)
              );
 
 

@@ -46,9 +46,9 @@
 * FORCE
 *-----------------------------------------------------------------
 VSS  VSS     0  dc 0
-VDD  VDD_1V8 0  pwl 0 0 10n {AVDD}
-VPWR pwrup   0  pwl 0 0 99n 0 100n {AVDD}
-VRST reset   0  pwl 0 0 99n 0 100n {AVDD} {T_RESET} {AVDD} {T_RESET_F} 0
+VDD  VDD_1V8 0  dc 0 pwl 0 0 10n {AVDD}
+VPWR pwrup   0  dc 0 pwl 0 0 99n 0 100n {AVDD}
+VRST reset   0  dc 0 pwl 0 0 99n 0 100n {AVDD} {T_RESET} {AVDD} {T_RESET_F} 0
 VCLK clk     0  dc 0 pulse (0 {AVDD} {T_START} {TRF} {TRF} {PW_CLK} {PERIOD_CLK})
 
 
@@ -62,7 +62,7 @@ VST stable 0 dc {AVDD*useStable}
 *-----------------------------------------------------------------
 
 VIOUT  IOUT  0   dc 0.5
-EVDIFF delta_vd 0 value={v(xdut.vsmpl_p) - v(xdut.vsmpl_n)}
+EVDIFF delta_vd 0 value={v(xdut.x0.smpl_p) - v(xdut.x0.smpl_n)}
 
 .include ../xdut.spi
 .include ../svinst.spi
@@ -75,24 +75,23 @@ EVDIFF delta_vd 0 value={v(xdut.vsmpl_p) - v(xdut.vsmpl_n)}
 .save v(pwrup)
 .save v(reset)
 .save v(clk)
-.save v(xdut.VSMPL_P)
-.save v(xdut.VSMPL_N)
+.save v(xdut.x0.SMPL_P)
+.save v(xdut.x0.SMPL_N)
 .save i(VIOUT)
 .save v(xdut.x0.vgn2)
 .save v(xdut.x0.vzero)
 .save v(xdut.x0.zero_ref)
-.save v(xdut.x3.vgp)
+.save v(xdut.x1.vgp)
 .save v(delta_vd)
 .save v(xdut.idac_0)
-.save v(xdut.x1.ctop)
-.save v(xdut.x2.ctop)
 .save v(xdut.ibn)
-*.save v(xdut.x3.reset_n)
 .save v(xdut.x3.vs)
 .save v(xdut.vcp)
 .save i(VDD)
 .save i(VSS)
-*.save all
+#ifdef Nosweep
+.save all
+#endif
 
 *----------------------------------------------------------------
 * NGSPICE control
@@ -103,8 +102,6 @@ set num_threads=8
 set color0=white
 set color1=black
 
-
-
 *- Override the default digital output bridge.
 pre_set auto_bridge_d_out =
      + ( ".model auto_dac dac_bridge(out_low = 0.0 out_high = 1.8)"
@@ -112,15 +109,15 @@ pre_set auto_bridge_d_out =
 
 unset askquit
 
-optran 0 0 0 1n 1u 0
+optran 0 0 0 100p 1u 0
 
 set fend = .raw
 
 * Don't run a temperature sweep
 #ifdef Nosweep
-foreach vtemp 25
+foreach vtemp -20 100
   option temp=$vtemp
-  tran 1n [{clock_period}*(16+{nbpt})]
+  tran [{clock_period}/100] [{clock_period}*(16+{nbpt})]
 *  [{clock_period}*16]
   write {cicname}_$vtemp$fend
 end
@@ -128,7 +125,7 @@ end
 * Run a temperature sweep
 foreach vtemp {temp_sweep}
   option temp=$vtemp
-  tran 1n [{clock_period}*(16+{nbpt})] [{clock_period}*16]
+  tran [{clock_period}/100] [{clock_period}*(16+{nbpt})] [{clock_period}*16]
   write {cicname}_$vtemp$fend
 end
 

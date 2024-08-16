@@ -21,7 +21,7 @@ module bgDig (
                 output logic       rst
                 );
 
-   parameter                       RESET=0,
+   parameter                       PRECHARGE=0,
                                    DIODE=1,
                                    BLANK1=2,
                                    BIGDIODE=3,
@@ -31,7 +31,7 @@ module bgDig (
 
    //logic                           rst;
    logic [4:0]                     sar_ind;
-   logic [3:0]                     count;
+   logic [5:0]                     count;
 
    always_ff @(posedge clk or posedge reset) begin
       if(reset)
@@ -42,7 +42,7 @@ module bgDig (
 
    always_ff @(posedge clk) begin
       if(rst) begin
-         state <= RESET;
+         state <= PRECHARGE;
          if(stable)
            resStableSelect <= 1;
          else
@@ -160,7 +160,7 @@ module bgDig (
                 end
               count <= count +1;
               end
-           RESET: begin
+           PRECHARGE: begin
               idacCoarse <= 8'h80;
               idacFine <= 8'h00;
               cmpZeroOffset <= 1;
@@ -173,17 +173,17 @@ module bgDig (
               diodeSelect <= 8'h80;
               resPtatEnable_n <= 0;
               valid <= 0;
-              if(count > 8) begin
+              if(count > 15) begin
                  count <= 0;
                  diode <= 0;
                  bigDiodeRes <= 0;
                  state <= DIODE;
               end
               else begin
-                 diode <= 0;
-                 bigDiodeRes <= 0;
+                 diode <= 1;
+                 bigDiodeRes <= 1;
                  count <= count +1;
-                 state <= RESET;
+                 state <= PRECHARGE;
             end
            end
          endcase // case (state)

@@ -38,7 +38,7 @@ def plotFile(name,ax,onepoint=False):
       fine.append(obj["fine_" + t])
 
     else:
-      y.append(float.nan)
+      y.append(float("nan"))
 
   if(onepoint):
     y = np.array(y)-offset
