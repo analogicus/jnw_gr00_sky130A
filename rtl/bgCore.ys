@@ -1,9 +1,9 @@
 
 
-read_verilog -sv JNWG00_BDAC_mdl.sv
-read_verilog -sv JNWG00_IDAC_mdl.sv
-read_verilog -sv JNWG00_CCELL_mdl.sv
-read_verilog -sv JNWG00_CMP_mdl.sv
+read_verilog -sv ../work/xsch/JNWG00_BDAC.v
+read_verilog -sv ../work/xsch/JNWG00_IDAC.v
+read_verilog -sv ../work/xsch/JNWG00_CCELL.v
+read_verilog -sv ../work/xsch/JNWG00_CMP.v
 read_verilog -sv bgCore.sv
 
 write_spice -big_endian -neg AVSS -pos AVDD bgCore.spice

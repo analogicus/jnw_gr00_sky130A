@@ -14,6 +14,10 @@
 .include ../../../rtl/bgCore.spice
 #endif
 
+* Reference so cicsim includes the verilog files in the sha
+*#include ../../../rtl/bgCore.v
+*#include ../../../rtl/bgDig.v
+
 *-----------------------------------------------------------------
 * OPTIONS
 *-----------------------------------------------------------------
@@ -32,7 +36,7 @@
 
 .param PW_CLK = PERIOD_CLK/2
 
-.param T_START = PERIOD_CLK*16
+.param T_START = PERIOD_CLK*4
 
 .param T_RESET = {T_START + PERIOD_CLK + PW_CLK}
 
@@ -46,6 +50,12 @@ VDD  VDD_1V8 0  pwl 0 0 10n {AVDD}
 VPWR pwrup   0  pwl 0 0 99n 0 100n {AVDD}
 VRST reset   0  pwl 0 0 99n 0 100n {AVDD} {T_RESET} {AVDD} {T_RESET_F} 0
 VCLK clk     0  dc 0 pulse (0 {AVDD} {T_START} {TRF} {TRF} {PW_CLK} {PERIOD_CLK})
+
+
+*-----------------------------------------------------------------
+* Features
+*-----------------------------------------------------------------
+VST stable 0 dc {AVDD*useStable}
 
 *-----------------------------------------------------------------
 * DUT
@@ -69,11 +79,19 @@ EVDIFF delta_vd 0 value={v(xdut.vsmpl_p) - v(xdut.vsmpl_n)}
 .save v(xdut.VSMPL_N)
 .save i(VIOUT)
 .save v(xdut.x0.vgn2)
+.save v(xdut.x0.vzero)
+.save v(xdut.x0.zero_ref)
 .save v(xdut.x3.vgp)
 .save v(delta_vd)
 .save v(xdut.idac_0)
 .save v(xdut.x1.ctop)
 .save v(xdut.x2.ctop)
+.save v(xdut.ibn)
+*.save v(xdut.x3.reset_n)
+.save v(xdut.x3.vs)
+.save v(xdut.vcp)
+.save i(VDD)
+.save i(VSS)
 *.save all
 
 *----------------------------------------------------------------
@@ -100,7 +118,7 @@ set fend = .raw
 
 * Don't run a temperature sweep
 #ifdef Nosweep
-foreach vtemp -25
+foreach vtemp 25
   option temp=$vtemp
   tran 1n [{clock_period}*(16+{nbpt})]
 *  [{clock_period}*16]

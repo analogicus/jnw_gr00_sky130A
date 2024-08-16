@@ -8,3 +8,48 @@
 #  scale: <scale, multiply result by scale>
 #  digits: <significant digits>
 #  unit: Unit
+coarse:
+  src:
+    - coarse_-25
+    - coarse_0
+    - coarse_25
+    - coarse_50
+    - coarse_75
+    - coarse_100
+  name: Coarse calibration
+  min: 0
+  max: 256
+  typ: 128
+  scale: 1000
+  digits: 0
+  unit: d
+fine:
+  src:
+    - fine_-25
+    - fine_0
+    - fine_25
+    - fine_50
+    - fine_75
+    - fine_100
+  name: Fine calibration
+  min: 0
+  max: 256
+  typ: 128
+  scale: 1000
+  digits: 0
+  unit: d
+i:
+  src:
+    - i_-25
+    - i_0
+    - i_25
+    - i_50
+    - i_75
+    - i_100
+  name: current
+  min: 2
+  max: 4
+  typ: 3
+  scale: 1e6
+  digits: 1
+  unit: uA

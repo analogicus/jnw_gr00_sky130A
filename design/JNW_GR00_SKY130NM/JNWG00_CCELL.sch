@@ -60,8 +60,6 @@ N 390 -410 390 -180 {
 lab=CT_1V8}
 N 390 -410 630 -410 {
 lab=CT_1V8}
-N 1440 -180 1470 -180 {
-lab=CB_1V8}
 N 890 -310 1220 -310 {
 lab=CB}
 N 710 -210 710 -130 {
@@ -93,7 +91,7 @@ lab=CB}
 N 1120 -310 1120 -240 {
 lab=CB}
 N 1090 -180 1090 -120 {
-lab=#net2}
+lab=CTN_1V8}
 C {sky130_fd_pr/cap_mim_m3_1.sym} 710 -280 0 0 {name=C1 model=cap_mim_m3_1 W=10 L=5	 MF=1 spiceprefix=X}
 C {JNW_ATR_SKY130NM/JNWATR_NCH_2C1F2.sym} 670 -410 0 0 {name=x2[1:0]}
 C {JNW_ATR_SKY130NM/JNWATR_PCH_2C1F2.sym} 930 -410 0 1 {name=x3[1:0]}
@@ -114,7 +112,6 @@ C {devices/lab_wire.sym} 480 -220 0 1 {name=p12 sig_type=std_logic lab=VDD_1V8}
 C {devices/lab_wire.sym} 570 -410 0 0 {name=p13 sig_type=std_logic lab=CT_1V8}
 C {devices/lab_wire.sym} 990 -410 0 1 {name=p7 sig_type=std_logic lab=CTN_1V8}
 C {devices/lab_wire.sym} 490 -180 0 1 {name=p14 sig_type=std_logic lab=CTN_1V8}
-C {devices/ipin.sym} 1470 -180 0 1 {name=p15 lab=CB_1V8}
 C {devices/iopin.sym} 1300 -310 0 0 {name=p21 lab=CB}
 C {JNW_ATR_SKY130NM/JNWATR_PCH_2C1F2.sym} 930 -190 3 0 {name=x1 }
 C {devices/lab_wire.sym} 900 -260 0 0 {name=p6 sig_type=std_logic lab=VDD_1V8}

@@ -4,6 +4,10 @@ options:
 corner:
   Lay: ''
   Sch: ''
+  Stable: |
+    .param useStable = 1
+  Ptat: |
+    .param useStable = 0
 ngspice:
   library: JNW_GR00_SKY130NM
   cell: bgCore

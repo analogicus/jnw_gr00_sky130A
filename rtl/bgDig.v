@@ -3,6 +3,7 @@ module bgDig (
                 input wire         clk, // expect a 10M clock
                 input wire         reset,
                 input logic        pwrup,
+                input logic        stable,
                 input wire         CMPO,
                 output logic [7:0] idacFine,
                 output logic [7:0] idacCoarse,
@@ -10,22 +11,23 @@ module bgDig (
                 output logic [7:0] diodeSelect,
                 output logic       resPtatEnable_n,
                 output logic       resStableSelect,
-                output logic [1:0] c1,
-                output logic [1:0] c2,
+                output logic       diode,
+                output logic       bigDiodeRes,
                 output logic       cmpZeroOffset,
                 output logic       cmpSwapInput,
                 output logic [3:0] state,
                 output logic       coarse,
                 output logic       valid,
-                output logic rst
+                output logic       rst
                 );
 
    parameter                       RESET=0,
                                    DIODE=1,
-                                   BIGDIODE=2,
-                                   COMPARE=3,
-                                   INCREMENT=4,
-                                   OUTPUT=5;
+                                   BLANK1=2,
+                                   BIGDIODE=3,
+                                   BLANK2=4,
+                                   INCREMENT=5,
+                                   OUTPUT=6;
 
    //logic                           rst;
    logic [4:0]                     sar_ind;
@@ -41,50 +43,54 @@ module bgDig (
    always_ff @(posedge clk) begin
       if(rst) begin
          state <= RESET;
-         resStableSelect <= 0;
+         if(stable)
+           resStableSelect <= 1;
+         else
+           resStableSelect <= 0;
          cmpZeroOffset <= 0;
          cmpSwapInput <= 0;
       end
       else begin
          case(state)
            DIODE: begin
-              resPtatEnable_n <= 0;
+              resPtatEnable_n <= 1;
               idacOutSelect_n[0] <= 0;
               idacOutSelect_n[1] <= 1;
               diodeSelect <= 8'h80;
-              c1 <= 2;
-              c2 <= 0;
+              diode <= 1;
+              cmpZeroOffset <= 0;
 
-              if(count == 3) begin
-                 state <= BIGDIODE;
+              if(count == 2) begin
+                 state <= BLANK1;
                  count <=0;
               end
               else begin
                  count <= count +1;
               end
 
-           end
+           end // case: DIODE
+           BLANK1: begin
+              diode <= 0;
+              state <= BIGDIODE;
+
+              end
            BIGDIODE: begin
               resPtatEnable_n <= 0;
               diodeSelect <= 8'h7F;
-              c1 <= 0;
-              c2 <= 2;
-
-              if(count == 5) begin
-                 state <= COMPARE;
+              bigDiodeRes <= 1;
+              if(count == 2) begin
+                 state <= BLANK2;
                  count <=0;
               end
               else begin
                  count <= count +1;
               end
 
-           end
-           COMPARE: begin
+           end // case: BIGDIODE
+           BLANK2: begin
+              bigDiodeRes <= 0;
               state <= INCREMENT;
-              c1 <= 1;
-              c2 <= 1;
-              //diodeSelect <= 8'h00;
-           end
+              end
            INCREMENT: begin
               if(coarse) begin
 
@@ -157,6 +163,7 @@ module bgDig (
            RESET: begin
               idacCoarse <= 8'h80;
               idacFine <= 8'h00;
+              cmpZeroOffset <= 1;
               sar_ind <= 0;
               coarse <= 1;
               idacOutSelect_n[0] <= 0;
@@ -166,18 +173,17 @@ module bgDig (
               diodeSelect <= 8'h80;
               resPtatEnable_n <= 0;
               valid <= 0;
-              if(count > 3) begin
+              if(count > 8) begin
                  count <= 0;
-                 c1 <= 0;
-                 c1 <= 0;
+                 diode <= 0;
+                 bigDiodeRes <= 0;
                  state <= DIODE;
               end
               else begin
-                 c1 <= 2;
-                 c2 <= 2;
+                 diode <= 0;
+                 bigDiodeRes <= 0;
                  count <= count +1;
                  state <= RESET;
-
             end
            end
          endcase // case (state)
