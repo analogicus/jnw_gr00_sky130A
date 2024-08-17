@@ -14,23 +14,27 @@ capacitor bandgap reference? I don't know, let's find out
 Grand Plan:
 
 - [x] Make a discrete time PTAT current source work (ideal comparator)
-- [ ] Add comparator, with chopping
+- [x] Add comparator, with auto-zero
 - [x] Add constant current output to the design 
 - [ ] Add constant voltage output (VREF) to the design 
 - [ ] Add a PTAT charging of a capacitor to VREF to convert from current to time 
 - [ ] Add a constant current charging to eliminate C variation?
 
 
-
 # What
 
 For schematics, see [documents/schematics](documents/schematics.md) 
 
-| What            | Lib/Folder       | Cell/Name |
-| :-              | :-:              | :-:       |
-| Schematic       | JNW_GR00_SKY130NM | JNW_GR00 |
-| Layout          | JNW_GR00_SKY130NM | JNW_GR00 |
-| LPE             | JNW_GR00_SKY130NM | JNW_GR00 |
+- [rtl/bgCore.sv](rtl/bgCore.sv): Analog top level (although written in verilog)
+  - design/JNW\_GR00\_SKY130NM/JNWG00\_BDAC: Bipolars and resistors for discrete
+    time Bandba reference
+  - design/JNW\_GR00\_SKY130NM/JNWG00\_IDAC: Current DAC 
+  - design/JNW\_GR00\_SKY130NM/JNWG00\_CMP: Auto-zero comparator and sampling caps
+- [rtl/bgDig.sv](rtl/bgDig.sv): Digital control (SAR, switch control, FSM)
+
+
+
+
 
 
 # Changelog/Plan
