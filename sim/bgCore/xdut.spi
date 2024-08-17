@@ -1,0 +1,2 @@
+*Automatic generated instance fron ../../tech/scripts/genxdut bgCore
+XDUT VDD_1V8 VSS IOUT CMPO pwrup reset idacFine.7 idacFine.6 idacFine.5 idacFine.4 idacFine.3 idacFine.2 idacFine.1 idacFine.0 idacCoarse.7 idacCoarse.6 idacCoarse.5 idacCoarse.4 idacCoarse.3 idacCoarse.2 idacCoarse.1 idacCoarse.0 idacOutSelect_n.3 idacOutSelect_n.2 idacOutSelect_n.1 idacOutSelect_n.0 diodeSelect.7 diodeSelect.6 diodeSelect.5 diodeSelect.4 diodeSelect.3 diodeSelect.2 diodeSelect.1 diodeSelect.0 resStableSelect resPtatEnable_n diode bigDiodeRes cmpZeroOffset cmpSwapInput  bgCore

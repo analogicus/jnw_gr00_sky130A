@@ -5,6 +5,7 @@ K {}
 V {}
 S {}
 E {}
+T {Current DAC} 1740 -1640 0 0 0.5 0.5 {}
 N 2300 -1210 2300 -1140 {
 lab=VS}
 N 2300 -1110 2320 -1110 {
@@ -304,3 +305,4 @@ C {devices/lab_wire.sym} 1580 -1280 0 1 {name=p32 sig_type=std_logic lab=VGF}
 C {SUN_TR_SKY130NM/SUNTR_RPPO16.sym} 1730 -810 1 0 {name=x8 }
 C {devices/lab_wire.sym} 1680 -770 0 0 {name=p50 sig_type=std_logic lab=VSS}
 C {devices/lab_wire.sym} 2220 -1110 0 0 {name=p51 sig_type=std_logic lab=IBN}
+C {cborder/border_xl.sym} 190 -220 0 0 {user="Carsten Wulff" company="Carsten Wulff Software"}

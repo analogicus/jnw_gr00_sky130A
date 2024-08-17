@@ -5,6 +5,7 @@ K {}
 V {}
 S {}
 E {}
+T {Comparator with auto-zero} 1340 -1500 0 0 0.5 0.5 {}
 N 2170 -1300 2210 -1300 {
 lab=VDD_1V8}
 N 2170 -1330 2170 -1300 {
@@ -735,3 +736,4 @@ C {JNW_GR00_SKY130NM/JNWG00_UCAP.sym} 1570 -1010 0 0 {name=x5[9:0]}
 C {JNW_GR00_SKY130NM/JNWG00_UCAP.sym} 1240 -940 0 0 {name=x15}
 C {JNW_GR00_SKY130NM/JNWG00_UCAP.sym} 900 -680 0 0 {name=x37[1:0]}
 C {JNW_GR00_SKY130NM/JNWG00_UCAP.sym} 430 -680 0 0 {name=x43[1:0]}
+C {cborder/border_xl.sym} -60 40 0 0 {user="Carsten Wulff" company="Carsten Wulff Software"}

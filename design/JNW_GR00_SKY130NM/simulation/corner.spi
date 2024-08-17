@@ -17,6 +17,9 @@
 optran 0 0 0 10n 10u 0
 op
 write TB_CMP.raw
+
+tran 1n 1u
+write TB_CMP_tran.raw
 exit
 .endc
 .end

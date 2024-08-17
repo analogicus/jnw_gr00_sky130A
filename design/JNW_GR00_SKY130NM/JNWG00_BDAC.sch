@@ -6,9 +6,9 @@ V {}
 S {}
 E {}
 T {Bipolar DAC} 770 -1150 0 0 0.5 0.5 {}
-N 180 -220 220 -220 {
+N 280 -220 320 -220 {
 lab=VSS}
-N 220 -220 410 -220 {
+N 320 -220 410 -220 {
 lab=VSS}
 N 410 -220 590 -220 {
 lab=VSS}
@@ -24,7 +24,7 @@ N 1270 -220 1440 -220 {
 lab=VSS}
 N 1440 -220 1470 -220 {
 lab=VSS}
-N 150 -220 180 -220 {
+N 250 -220 280 -220 {
 lab=VSS}
 N 820 -780 820 -740 {
 lab=#net1}
@@ -71,7 +71,7 @@ lab=R_IBPS_1V8}
 N 1570 -280 1570 -190 {
 lab=R_IBPS_1V8}
 N 1610 -750 1610 -720 {
-lab=#net4}
+lab=VD}
 N 1610 -870 1610 -830 {
 lab=VD}
 N 1470 -790 1590 -790 {
@@ -91,7 +91,7 @@ lab=#net1}
 N 420 -980 820 -980 {
 lab=VD}
 N 1610 -530 1610 -510 {
-lab=#net5}
+lab=#net4}
 N 1610 -620 1610 -610 {
 lab=#net2}
 N 1470 -570 1590 -570 {
@@ -99,31 +99,31 @@ lab=VSS}
 N 1470 -470 1590 -470 {
 lab=VSS}
 N 1610 -430 1610 -410 {
-lab=#net6}
+lab=#net5}
 N 460 -600 470 -600 {
-lab=#net7}
+lab=#net6}
 N 650 -600 650 -590 {
-lab=#net8}
+lab=#net7}
 N 470 -600 470 -560 {
-lab=#net7}
+lab=#net6}
 N 650 -590 650 -560 {
-lab=#net8}
+lab=#net7}
 N 420 -570 420 -540 {
-lab=#net7}
+lab=#net6}
 N 420 -540 470 -540 {
-lab=#net7}
+lab=#net6}
 N 470 -560 470 -540 {
-lab=#net7}
+lab=#net6}
 N 610 -570 610 -530 {
-lab=#net8}
-N 610 -530 650 -530 {
-lab=#net8}
-N 650 -560 650 -530 {
-lab=#net8}
-N 450 -540 450 -420 {
 lab=#net7}
+N 610 -530 650 -530 {
+lab=#net7}
+N 650 -560 650 -530 {
+lab=#net7}
+N 450 -540 450 -420 {
+lab=#net6}
 N 640 -530 640 -420 {
-lab=#net8}
+lab=#net7}
 N 640 -340 680 -340 {
 lab=VSS}
 N 450 -340 490 -340 {
@@ -131,11 +131,11 @@ lab=VSS}
 N 820 -990 820 -980 {
 lab=VD}
 N 450 -420 450 -370 {
-lab=#net7}
+lab=#net6}
 N 450 -310 450 -220 {
 lab=VSS}
 N 640 -420 640 -370 {
-lab=#net8}
+lab=#net7}
 N 640 -310 640 -220 {
 lab=VSS}
 N 420 -980 420 -630 {
@@ -148,11 +148,13 @@ N 1660 -970 1660 -860 {
 lab=VD}
 N 1610 -860 1660 -860 {
 lab=VD}
-N 1660 -860 1660 -740 {}
-N 1610 -740 1660 -740 {}
-C {devices/ipin.sym} 150 -220 0 0 {name=p1 lab=VSS}
+N 1660 -860 1660 -740 {
+lab=VD}
+N 1610 -740 1660 -740 {
+lab=VD}
+C {devices/ipin.sym} 250 -220 0 0 {name=p1 lab=VSS}
 C {devices/iopin.sym} 820 -1040 3 0 {name=p2 lab=VD}
-C {devices/ipin.sym} 150 -540 0 0 {name=p3 lab=BD_1V8[7:0]}
+C {devices/ipin.sym} 330 -440 0 0 {name=p3 lab=BD_1V8[7:0]}
 C {SUN_TR_SKY130NM/SUNTR_RPPO4.sym} 820 -860 1 0 {name=x9 }
 C {devices/ipin.sym} 590 -820 0 0 {name=p12 lab=RES_N_1V8}
 C {JNW_ATR_SKY130NM/JNWATR_NCH_12C1F2.sym} 410 -340 0 0 {name=x11 }
@@ -179,3 +181,4 @@ C {devices/lab_wire.sym} 490 -340 0 1 {name=p5 sig_type=std_logic lab=VSS}
 C {devices/lab_wire.sym} 680 -340 0 1 {name=p6 sig_type=std_logic lab=VSS}
 C {SUN_TR_SKY130NM/SUNTR_RPPO16.sym} 1610 -610 1 0 {name=x6 }
 C {SUN_TR_SKY130NM/SUNTR_RPPO16.sym} 1610 -720 1 0 {name=x7 }
+C {cborder/border_s.sym} 1410 -270 0 0 {user="Carsten Wulff" company="Carsten Wulff Software"}

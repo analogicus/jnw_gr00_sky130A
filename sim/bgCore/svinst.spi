@@ -1,0 +1,171 @@
+*Automatic generated instance fron ../../tech/scripts/genxdut bgDig
+adut [clk
++ reset
++ pwrup
++ stable
++ CMPO
++ ]
++ [idacFine.7
++ idacFine.6
++ idacFine.5
++ idacFine.4
++ idacFine.3
++ idacFine.2
++ idacFine.1
++ idacFine.0
++ idacCoarse.7
++ idacCoarse.6
++ idacCoarse.5
++ idacCoarse.4
++ idacCoarse.3
++ idacCoarse.2
++ idacCoarse.1
++ idacCoarse.0
++ idacOutSelect_n.3
++ idacOutSelect_n.2
++ idacOutSelect_n.1
++ idacOutSelect_n.0
++ diodeSelect.7
++ diodeSelect.6
++ diodeSelect.5
++ diodeSelect.4
++ diodeSelect.3
++ diodeSelect.2
++ diodeSelect.1
++ diodeSelect.0
++ resPtatEnable_n
++ resStableSelect
++ diode
++ bigDiodeRes
++ cmpZeroOffset
++ cmpSwapInput
++ state.3
++ state.2
++ state.1
++ state.0
++ coarse
++ valid
++ rst
++ ] null dut
+.model dut d_cosim simulation="../bgDig.so" delay=10p
+
+* Inputs
+Rsvi0 clk 0 1G
+Rsvi1 reset 0 1G
+Rsvi2 pwrup 0 1G
+Rsvi3 stable 0 1G
+Rsvi4 CMPO 0 1G
+
+* Outputs
+Rsvi5 idacFine.7 0 1G
+Rsvi6 idacFine.6 0 1G
+Rsvi7 idacFine.5 0 1G
+Rsvi8 idacFine.4 0 1G
+Rsvi9 idacFine.3 0 1G
+Rsvi10 idacFine.2 0 1G
+Rsvi11 idacFine.1 0 1G
+Rsvi12 idacFine.0 0 1G
+Rsvi13 idacCoarse.7 0 1G
+Rsvi14 idacCoarse.6 0 1G
+Rsvi15 idacCoarse.5 0 1G
+Rsvi16 idacCoarse.4 0 1G
+Rsvi17 idacCoarse.3 0 1G
+Rsvi18 idacCoarse.2 0 1G
+Rsvi19 idacCoarse.1 0 1G
+Rsvi20 idacCoarse.0 0 1G
+Rsvi21 idacOutSelect_n.3 0 1G
+Rsvi22 idacOutSelect_n.2 0 1G
+Rsvi23 idacOutSelect_n.1 0 1G
+Rsvi24 idacOutSelect_n.0 0 1G
+Rsvi25 diodeSelect.7 0 1G
+Rsvi26 diodeSelect.6 0 1G
+Rsvi27 diodeSelect.5 0 1G
+Rsvi28 diodeSelect.4 0 1G
+Rsvi29 diodeSelect.3 0 1G
+Rsvi30 diodeSelect.2 0 1G
+Rsvi31 diodeSelect.1 0 1G
+Rsvi32 diodeSelect.0 0 1G
+Rsvi33 resPtatEnable_n 0 1G
+Rsvi34 resStableSelect 0 1G
+Rsvi35 diode 0 1G
+Rsvi36 bigDiodeRes 0 1G
+Rsvi37 cmpZeroOffset 0 1G
+Rsvi38 cmpSwapInput 0 1G
+Rsvi39 state.3 0 1G
+Rsvi40 state.2 0 1G
+Rsvi41 state.1 0 1G
+Rsvi42 state.0 0 1G
+Rsvi43 coarse 0 1G
+Rsvi44 valid 0 1G
+Rsvi45 rst 0 1G
+
+E_STATE_idacFine dec_idacFine 0 value={( 0 
++ + 128*v(idacFine.7)/AVDD
++ + 64*v(idacFine.6)/AVDD
++ + 32*v(idacFine.5)/AVDD
++ + 16*v(idacFine.4)/AVDD
++ + 8*v(idacFine.3)/AVDD
++ + 4*v(idacFine.2)/AVDD
++ + 2*v(idacFine.1)/AVDD
++ + 1*v(idacFine.0)/AVDD
++)/1000}
+.save v(dec_idacFine)
+
+E_STATE_idacCoarse dec_idacCoarse 0 value={( 0 
++ + 128*v(idacCoarse.7)/AVDD
++ + 64*v(idacCoarse.6)/AVDD
++ + 32*v(idacCoarse.5)/AVDD
++ + 16*v(idacCoarse.4)/AVDD
++ + 8*v(idacCoarse.3)/AVDD
++ + 4*v(idacCoarse.2)/AVDD
++ + 2*v(idacCoarse.1)/AVDD
++ + 1*v(idacCoarse.0)/AVDD
++)/1000}
+.save v(dec_idacCoarse)
+
+E_STATE_idacOutSelect_n dec_idacOutSelect_n 0 value={( 0 
++ + 8*v(idacOutSelect_n.3)/AVDD
++ + 4*v(idacOutSelect_n.2)/AVDD
++ + 2*v(idacOutSelect_n.1)/AVDD
++ + 1*v(idacOutSelect_n.0)/AVDD
++)/1000}
+.save v(dec_idacOutSelect_n)
+
+E_STATE_diodeSelect dec_diodeSelect 0 value={( 0 
++ + 128*v(diodeSelect.7)/AVDD
++ + 64*v(diodeSelect.6)/AVDD
++ + 32*v(diodeSelect.5)/AVDD
++ + 16*v(diodeSelect.4)/AVDD
++ + 8*v(diodeSelect.3)/AVDD
++ + 4*v(diodeSelect.2)/AVDD
++ + 2*v(diodeSelect.1)/AVDD
++ + 1*v(diodeSelect.0)/AVDD
++)/1000}
+.save v(dec_diodeSelect)
+
+.save v(resPtatEnable_n)
+
+.save v(resStableSelect)
+
+.save v(diode)
+
+.save v(bigDiodeRes)
+
+.save v(cmpZeroOffset)
+
+.save v(cmpSwapInput)
+
+E_STATE_state dec_state 0 value={( 0 
++ + 8*v(state.3)/AVDD
++ + 4*v(state.2)/AVDD
++ + 2*v(state.1)/AVDD
++ + 1*v(state.0)/AVDD
++)/1000}
+.save v(dec_state)
+
+.save v(coarse)
+
+.save v(valid)
+
+.save v(rst)
+

@@ -1,0 +1,38 @@
+magic
+tech sky130A
+magscale 1 2
+timestamp 1723845105
+<< locali >>
+rect -196 2003 1396 2196
+rect -12 1188 181 2003
+rect -12 -4 180 196
+rect -196 -196 1396 -4
+<< metal1 >>
+rect 244 1728 308 1988
+rect 396 716 564 1436
+rect 628 704 820 1496
+rect 244 68 308 328
+<< metal4 >>
+rect 244 68 308 328
+use JNWATR_PCH_2C1F2  JNWATR_PCH_2C1F2_0 ../JNW_ATR_SKY130NM
+timestamp 1712527200
+transform 1 0 84 0 1 1228
+box -184 -128 1208 928
+use JNWATR_NCH_2C1F2  x1 ../JNW_ATR_SKY130NM
+timestamp 1712527200
+transform 1 0 84 0 1 28
+box -184 -128 1208 928
+<< labels >>
+flabel metal1 244 1728 308 1988 0 FreeSans 1600 0 0 0 EN_N
+port 2 nsew
+flabel metal1 244 68 308 328 0 FreeSans 1600 0 0 0 EN
+port 3 nsew
+flabel metal1 396 620 564 1436 0 FreeSans 1600 0 0 0 B
+port 4 nsew
+flabel metal1 628 460 820 1596 0 FreeSans 1600 0 0 0 A
+port 5 nsew
+flabel locali -196 2003 1396 2196 0 FreeSans 800 0 0 0 VDD_1V8
+port 6 nsew
+flabel locali -196 -196 1396 -4 0 FreeSans 800 0 0 0 VSS
+port 7 nsew
+<< end >>

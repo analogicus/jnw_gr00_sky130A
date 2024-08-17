@@ -41,3 +41,4 @@ C {devices/ipin.sym} 30 -340 0 0 {name=p4 lab=EN_N}
 C {devices/ipin.sym} 30 0 0 0 {name=p5 lab=EN}
 C {devices/ipin.sym} -120 -340 0 0 {name=p6 lab=VDD_1V8}
 C {devices/ipin.sym} -110 0 0 0 {name=p8 lab=VSS}
+C {cborder/border_s.sym} 370 180 0 0 {user="Carsten Wulff" company="Carsten Wulff Software"}
