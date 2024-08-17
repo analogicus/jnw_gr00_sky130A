@@ -586,8 +586,9 @@ lab=SMPL_N}
 N 380 -880 380 -820 {
 lab=SMPL_N}
 N 350 -950 350 -920 {
-lab=DIODE_N}
-N 180 -820 190 -820 {}
+lab=BIGDIODE_N}
+N 180 -820 190 -820 {
+lab=IDAC}
 C {JNW_ATR_SKY130NM/JNWATR_PCH_8C5F0.sym} 2250 -1300 0 1 {name=x11[2:0]}
 C {JNW_ATR_SKY130NM/JNWATR_PCH_8C5F0.sym} 2390 -1300 0 0 {name=x14[2:0]}
 C {JNW_ATR_SKY130NM/JNWATR_PCH_8C1F2.sym} 2250 -1200 0 1 {name=x15[2:0]}
@@ -665,8 +666,6 @@ C {JNW_ATR_SKY130NM/JNWATR_NCH_2C1F2.sym} 1150 -840 0 0 {name=x8 }
 C {devices/lab_wire.sym} 1100 -840 0 0 {name=p8 sig_type=std_logic lab=PWRUP_1V8}
 C {devices/lab_wire.sym} 1220 -840 0 1 {name=p16 sig_type=std_logic lab=VSS}
 C {devices/lab_wire.sym} 1150 -1040 0 0 {name=p17 sig_type=std_logic lab=VSS}
-C {sky130_fd_pr/cap_mim_m3_1.sym} 1570 -1050 0 0 {name=C1 model=cap_mim_m3_1 W=25 L=25 MF=1 spiceprefix=X}
-C {sky130_fd_pr/cap_mim_m3_1.sym} 1240 -980 0 0 {name=C2 model=cap_mim_m3_1 W=5 L=5 MF=1 spiceprefix=X}
 C {JNW_ATR_SKY130NM/JNWATR_NCH_2C1F2.sym} 1770 -990 0 1 {name=x18 }
 C {devices/lab_wire.sym} 1590 -1090 0 0 {name=p59 sig_type=std_logic lab=VZERO}
 C {devices/lab_wire.sym} 1760 -1090 0 1 {name=p67 sig_type=std_logic lab=VZERO_FB}
@@ -701,9 +700,7 @@ C {devices/lab_wire.sym} 1680 -1150 0 1 {name=p23 sig_type=std_logic lab=VSS}
 C {devices/lab_wire.sym} 1650 -1150 1 1 {name=p24 sig_type=std_logic lab=ZERO_BA}
 C {devices/lab_wire.sym} 1650 -1280 3 1 {name=p30 sig_type=std_logic lab=ZERO_NA}
 C {devices/lab_wire.sym} 480 -460 0 1 {name=p76 sig_type=std_logic lab=ZERO_NA}
-C {sky130_fd_pr/cap_mim_m3_1.sym} 430 -720 0 0 {name=C4 model=cap_mim_m3_1 W=10	 L=10 MF=1 spiceprefix=X}
 C {devices/lab_wire.sym} 430 -650 0 1 {name=p18 sig_type=std_logic lab=VSS}
-C {sky130_fd_pr/cap_mim_m3_1.sym} 900 -720 0 0 {name=C5 model=cap_mim_m3_1 W=10	 L=10 MF=1 spiceprefix=X}
 C {devices/lab_wire.sym} 900 -650 0 1 {name=p19 sig_type=std_logic lab=VSS}
 C {devices/ipin.sym} 810 -300 0 0 {name=p25 lab=DIODE_1V8}
 C {SUN_TR_SKY130NM/SUNTR_IVX1_CV.sym} 840 -300 0 0 {name=x17 }
@@ -734,3 +731,7 @@ C {devices/lab_wire.sym} 340 -1210 0 1 {name=p84 sig_type=std_logic lab=DIODE_N}
 C {SUN_TR_SKY130NM/SUNTR_NCHDL.sym} 350 -920 1 0 {name=x13}
 C {devices/lab_wire.sym} 350 -850 0 1 {name=p87 sig_type=std_logic lab=VSS}
 C {devices/lab_wire.sym} 350 -950 0 1 {name=p88 sig_type=std_logic lab=BIGDIODE_N}
+C {JNW_GR00_SKY130NM/JNWG00_UCAP.sym} 1570 -1010 0 0 {name=x5[9:0]}
+C {JNW_GR00_SKY130NM/JNWG00_UCAP.sym} 1240 -940 0 0 {name=x15}
+C {JNW_GR00_SKY130NM/JNWG00_UCAP.sym} 900 -680 0 0 {name=x37[1:0]}
+C {JNW_GR00_SKY130NM/JNWG00_UCAP.sym} 430 -680 0 0 {name=x43[1:0]}

@@ -76,19 +76,21 @@ For schematics, see [documents/schematics](documents/schematics.md)
 ## PTAT Current 
 ### Monte Carlo
 
-![](sim/JNWG00_CORE/ptat_Sch_mc.svg)
+![](sim/bgCore/tran_Sch_Ptat_mc.svg)
 
 ### Typical, Slow, Fast
 
-![](sim/JNWG00_CORE/ptat_Sch_tfs.svg)
+![](sim/bgCore/tran_Sch_Ptat_tfs.svg)
 
 ## Stable Current
 
 ### Monte Carlo
 
-![](sim/JNWG00_CORE/stable_Sch_mc.svg)
+![](sim/bgCore/tran_Sch_Stable_mc.svg)
+
 
 ### Typical, Slow, Fast
 
-![](sim/JNWG00_CORE/stable_Sch_tfs.svg)
+![](sim/bgCore/tran_Sch_Stable_tfs.svg)
+
 

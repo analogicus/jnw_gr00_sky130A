@@ -18,6 +18,13 @@ all:
 	make tfs mc MODE=Ptat
 	make tfs mc MODE=Stable
 
+plotall:
+	python plot.py tran_Sch_Stable_mc.run --no-show
+	python plot.py tran_Sch_Stable_tfs.run --no-show
+	python plot.py tran_Sch_Ptat_mc.run --no-show
+	python plot.py tran_Sch_Ptat_tfs.run --no-show
+
+
 netlist:
 	make netlist_sv
 	-rm bgDig.so
