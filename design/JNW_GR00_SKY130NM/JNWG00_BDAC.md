@@ -1,5 +1,9 @@
 
-A bipolar DAC that can switch in 1, or more (up to 8) diodes. 
+A bipolar DAC that can switch in
 
-There is also a resistor that can be enabled to provide R + diode combination.
+- Diode only (CTAT voltage)
+- Big diode and resistor (PTAT current)
+- Resistor to ground (CTAT current)
+
+
 

@@ -1,16 +1,30 @@
 description: TB_NCM
 simulations:
    tran:
-    name: Transient analysis
+    name: Stable current
+    description: |
+      Check Stable current over PVT
+    data:
+      - name: Sch_typ
+        src: results/tran_Sch_Stable_typical
+        method: typical
+      - name: Sch_tfs
+        src: results/tran_Sch_Stable_tfs
+        method: minmax
+      - name: Sch_3std
+        src: results/tran_Sch_Stable_mc
+        method: 3std
+   tran:
+    name: Ptat current
     description: |
       Check transient operation
     data:
       - name: Sch_typ
-        src: results/tran_Sch_typical
+        src: results/tran_Sch_Ptat_typical
         method: typical
-      - name: Sch_etc
-        src: results/tran_Sch_etc
+      - name: Sch_tfs
+        src: results/tran_Sch_Ptat_tfs
         method: minmax
       - name: Sch_3std
-        src: results/tran_Sch_mc
+        src: results/tran_Sch_Ptat_mc
         method: 3std

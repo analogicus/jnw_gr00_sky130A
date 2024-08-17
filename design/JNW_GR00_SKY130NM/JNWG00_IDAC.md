@@ -1,17 +1,11 @@
 
 
-The principle behind the IDAC is to have a single PMOS transistor, and use 
-two segmented DACs to control the gate voltage of the PMOS.
+The principle behind the IDAC is to have a single PMOS transistor, 
+a DAC to control the gate voltage of the PMOS.
 
-At power off the gate of the PMOS is connected to ground, and the coarse DAC
-bottom plates are connected to ground. As such, there is no charge stored in the
-CDAC. 
+The PMOS gate is pre-charged to approximately 5 uA.
 
-A SAR algorithm is run on the coarse DAC first (`../verilog/core_tb.v`) and then on
-the fine DAC. 
-
-After the SAR algorithms the loop does a bang, bang type loop, increasing, or
-decreasing the fine DAC. Hopefully that compensates for leakage in the IDAC. 
+A SAR algorithm is run on the DAC to modify the PMOS gate voltage.
 
 The IDAC must be powered down, and powered up once in a while.
 

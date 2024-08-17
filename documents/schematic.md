@@ -79,11 +79,35 @@ The IDAC must be powered down, and powered up once in a while.
 ![](JNW_GR00_SKY130NM/JNWG00_IDAC.svg)
 
 
+## JNW\_GR00\_SKY130NM/JNWG00\_TG
+
+
+
+
+![](JNW_GR00_SKY130NM/JNWG00_TG.svg)
+
+
+## JNW\_GR00\_SKY130NM/JNWG00\_UCAP
+
+
+
+
+![](JNW_GR00_SKY130NM/JNWG00_UCAP.svg)
+
+
 ## JNW\_GR00\_SKY130NM/JNW\_GR00
 
 
 
 
 ![](JNW_GR00_SKY130NM/JNW_GR00.svg)
+
+
+## JNW\_GR00\_SKY130NM/TB\_CMP
+
+
+
+
+![](JNW_GR00_SKY130NM/TB_CMP.svg)
 
 
