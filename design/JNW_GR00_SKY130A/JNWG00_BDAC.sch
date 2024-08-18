@@ -155,17 +155,17 @@ lab=VD}
 C {devices/ipin.sym} 250 -220 0 0 {name=p1 lab=VSS}
 C {devices/iopin.sym} 820 -1040 3 0 {name=p2 lab=VD}
 C {devices/ipin.sym} 330 -440 0 0 {name=p3 lab=BD_1V8[7:0]}
-C {SUN_TR_SKY130NM/SUNTR_RPPO4.sym} 820 -860 1 0 {name=x9 }
+C {JNW_TR_SKY130A/JNWTR_RPPO4.sym} 820 -860 1 0 {name=x9 }
 C {devices/ipin.sym} 590 -820 0 0 {name=p12 lab=RES_N_1V8}
-C {JNW_ATR_SKY130NM/JNWATR_NCH_12C1F2.sym} 410 -340 0 0 {name=x11 }
-C {JNW_ATR_SKY130NM/JNWATR_NCH_12C1F2.sym} 600 -340 0 0 {name=x12 }
+C {JNW_ATR_SKY130A/JNWATR_NCH_12C1F2.sym} 410 -340 0 0 {name=x11 }
+C {JNW_ATR_SKY130A/JNWATR_NCH_12C1F2.sym} 600 -340 0 0 {name=x12 }
 C {devices/lab_wire.sym} 380 -340 0 0 {name=p13 sig_type=std_logic lab=BD_1V8[7]}
 C {devices/lab_wire.sym} 570 -340 0 0 {name=p14 sig_type=std_logic lab=BD_1V8[6]}
-C {JNW_ATR_SKY130NM/JNWATR_NCH_12C1F2.sym} 1570 -280 0 0 {name=x2 }
-C {SUN_TR_SKY130NM/SUNTR_RPPO16.sym} 1610 -410 1 0 {name=x3 }
+C {JNW_ATR_SKY130A/JNWATR_NCH_12C1F2.sym} 1570 -280 0 0 {name=x2 }
+C {JNW_TR_SKY130A/JNWTR_RPPO16.sym} 1610 -410 1 0 {name=x3 }
 C {devices/ipin.sym} 1370 -190 0 0 {name=p4 lab=R_IBPS_1V8}
-C {SUN_TR_SKY130NM/SUNTR_RPPO4.sym} 1610 -830 1 0 {name=x4 }
-C {SUN_TR_SKY130NM/SUNTR_RPPO2.sym} 1610 -950 1 0 {name=x5 }
+C {JNW_TR_SKY130A/JNWTR_RPPO4.sym} 1610 -830 1 0 {name=x4 }
+C {JNW_TR_SKY130A/JNWTR_RPPO2.sym} 1610 -950 1 0 {name=x5 }
 C {sky130_fd_pr/pnp_05v5.sym} 630 -600 0 1 {name=Q1
 model=pnp_05v5_W3p40L3p40
 m=8
@@ -176,9 +176,9 @@ model=pnp_05v5_W3p40L3p40
 m=1
 spiceprefix=X
 }
-C {SUN_TR_SKY130NM/SUNTR_RPPO16.sym} 1610 -510 1 0 {name=x1 }
+C {JNW_TR_SKY130A/JNWTR_RPPO16.sym} 1610 -510 1 0 {name=x1 }
 C {devices/lab_wire.sym} 490 -340 0 1 {name=p5 sig_type=std_logic lab=VSS}
 C {devices/lab_wire.sym} 680 -340 0 1 {name=p6 sig_type=std_logic lab=VSS}
-C {SUN_TR_SKY130NM/SUNTR_RPPO16.sym} 1610 -610 1 0 {name=x6 }
-C {SUN_TR_SKY130NM/SUNTR_RPPO16.sym} 1610 -720 1 0 {name=x7 }
+C {JNW_TR_SKY130A/JNWTR_RPPO16.sym} 1610 -610 1 0 {name=x6 }
+C {JNW_TR_SKY130A/JNWTR_RPPO16.sym} 1610 -720 1 0 {name=x7 }
 C {cborder/border_s.sym} 1410 -270 0 0 {user="Carsten Wulff" company="Carsten Wulff Software"}

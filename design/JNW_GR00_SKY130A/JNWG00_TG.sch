@@ -31,9 +31,9 @@ N -120 -170 -110 -170 {
 lab=A}
 N -110 -170 -80 -170 {
 lab=A}
-C {JNW_ATR_SKY130NM/JNWATR_NCH_2C1F2.sym} 30 -50 3 0 {name=x1 }
+C {JNW_ATR_SKY130A/JNWATR_NCH_2C1F2.sym} 30 -50 3 0 {name=x1 }
 C {devices/lab_wire.sym} 30 -120 0 1 {name=p7 sig_type=std_logic lab=VSS}
-C {JNW_ATR_SKY130NM/JNWATR_PCH_2C1F2.sym} 30 -300 1 0 {name=x2 }
+C {JNW_ATR_SKY130A/JNWATR_PCH_2C1F2.sym} 30 -300 1 0 {name=x2 }
 C {devices/lab_wire.sym} 30 -230 0 1 {name=p1 sig_type=std_logic lab=VDD_1V8}
 C {devices/iopin.sym} -110 -170 2 0 {name=p2 lab=A}
 C {devices/iopin.sym} 120 -170 2 1 {name=p3 lab=B}

@@ -118,7 +118,7 @@ value="
 * ngspice commands
 .include corner.spi
 "}
-C {JNW_GR00_SKY130NM/JNWG00_CMP.sym} 550 -600 0 0 {name=xdut}
+C {JNW_GR00_SKY130A/JNWG00_CMP.sym} 550 -600 0 0 {name=xdut}
 C {devices/lab_wire.sym} 760 -640 0 1 {name=p3 sig_type=std_logic lab=VCP}
 C {devices/lab_wire.sym} 760 -620 0 1 {name=p4 sig_type=std_logic lab=IBN}
 C {cborder/border_s.sym} 1250 -170 0 0 {user="Carsten Wulff" company="Carsten Wulff Software"
