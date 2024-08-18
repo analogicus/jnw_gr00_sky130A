@@ -1,5 +1,5 @@
 
-# JNW_GR00_SKY130NM
+# JNW_GR00_SKY130A
 
 # Who
 Carsten Wulff

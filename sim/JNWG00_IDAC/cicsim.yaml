@@ -2,5 +2,5 @@ corner:
   Lay: ''
   Sch: ''
 ngspice:
-  library: JNW_GR00_SKY130NM
+  library: JNW_GR00_SKY130A
   cell: JNWG00_IDAC
