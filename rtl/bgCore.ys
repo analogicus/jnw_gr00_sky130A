@@ -2,7 +2,6 @@
 
 read_verilog -sv ../work/xsch/JNWG00_BDAC.v
 read_verilog -sv ../work/xsch/JNWG00_IDAC.v
-read_verilog -sv ../work/xsch/JNWG00_CCELL.v
 read_verilog -sv ../work/xsch/JNWG00_CMP.v
 read_verilog -sv bgCore.sv
 

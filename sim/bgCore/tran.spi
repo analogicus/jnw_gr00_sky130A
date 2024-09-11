@@ -10,7 +10,7 @@
 .include ../../../work/xsch/JNWG00_CMP.spice
 .include ../../../work/xsch/JNWG00_IDAC.spice
 .include ../../../work/xsch/JNWG00_BDAC.spice
-.include ../../../work/xsch/JNWG00_CCELL.spice
+*.include ../../../work/xsch/JNWG00_CCELL.spice
 .include ../../../rtl/bgCore.spice
 #endif
 
