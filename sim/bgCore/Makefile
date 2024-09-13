@@ -25,7 +25,7 @@ plotall:
 	python plot.py tran_Sch_Ptat_tfs.run --no-show
 
 
-netlist1:
+netlist:
 	make netlist_sv
 	-rm bgDig.so
 	-rm -rf bgDig_obj_dir
@@ -35,7 +35,7 @@ netlist1:
 test:
 	${MAKE} typical COPT="Debug"
 
-typical: netlist1
+typical: netlist
 	cicsim run --replace replace.yaml --name ${VIEW}_${MODE}_typical ${TB} ${COPT} ${VIEW} ${MODE} Gt Ktt Tt Vt
 
 slow: netlist
