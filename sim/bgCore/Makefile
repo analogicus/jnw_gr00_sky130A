@@ -25,7 +25,7 @@ plotall:
 	python plot.py tran_Sch_Ptat_tfs.run --no-show
 
 
-netlist:
+netlist1:
 	make netlist_sv
 	-rm bgDig.so
 	-rm -rf bgDig_obj_dir
@@ -35,28 +35,28 @@ netlist:
 test:
 	${MAKE} typical COPT="Debug"
 
-typical: netlist
+typical: netlist1
 	cicsim run --replace replace.yaml --name ${VIEW}_${MODE}_typical ${TB} ${COPT} ${VIEW} ${MODE} Gt Ktt Tt Vt
 
-slow: netlist
+slow: netlist1
 	cicsim run --replace replace.yaml --name ${VIEW}_${MODE}_slow ${TB} ${COPT} ${VIEW} ${MODE} Gt Kss "Th,Tl" Vl
 
-fast: netlist
+fast: netlist1
 	cicsim run --replace replace.yaml --name ${VIEW}_${MODE}_fast ${TB} ${COPT} ${VIEW} ${MODE} Gt Kff "Th,Tl" Vh
 
-tfs: netlist
+tfs: netlist1
 	cicsim run --replace replace.yaml --name ${VIEW}_${MODE}_tfs ${TB} ${COPT} ${VIEW} ${MODE} Gt "Ktt,Kss,Kff" "Tt" "Vt,Vl,Vh"
 
-etc: netlist
+etc: netlist1
 	cicsim run --replace replace.yaml --name ${VIEW}_${MODE}_etc ${TB} ${COPT} ${VIEW} ${MODE} Gt "Kss,Kff,Ksf,Kfs" "Th,Tl" "Vl,Vh"
 
-mc: netlist
+mc: netlist1
 	cicsim run --replace replace.yaml --name ${VIEW}_${MODE}_mc --count 10 ${TB} ${COPT} ${VIEW} ${MODE} Gt "Kttmm" "Tt" "Vt"
 
-ntc: netlist
+ntc: netlist1
 	cicsim run --replace replace.yaml --name ${VIEW}_${MODE}_ntc ${TB} ${COPT} ${VIEW} ${MODE} Gt "Ktt,Kss,Kff" "Tt" Vt
 
-temp: netlist
+temp: netlist1
 	cicsim run --replace replace.yaml --name ${VIEW}_${MODE}_temp ${TB} ${COPT} ${VIEW} ${MODE} Gt "Ktt" "Tt,Th,Tl" Vt
 
 summary:
